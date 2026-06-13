@@ -1,0 +1,81 @@
+aid: sprinklr
+name: Sprinklr
+description: Sprinklr is a unified customer experience management (Unified-CXM) platform
+  offering REST APIs for social media management, customer service, marketing, and
+  advertising across 30+ digital channels. APIs support listening, publishing, reporting,
+  user provisioning, digital asset management, and webhook integrations, all secured
+  via OAuth 2.0 and accessible to enterprise license holders.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Social Media Management
+  - Customer Experience
+  - Customer Service
+  - Marketing
+  - Advertising
+  - Listening
+  - Publishing
+  - Reporting
+  - Unified CXM
+apis:
+  - aid: sprinklr:sprinklr-api
+    name: Sprinklr API
+    description: RESTful APIs for integrating with the Sprinklr Unified-CXM platform,
+      covering social listening, publishing, reporting, user provisioning, digital
+      asset management, and webhook subscriptions across 30+ digital channels.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://dev.sprinklr.com/api-overview
+    baseURL: https://api3.sprinklr.com
+    tags:
+      - Social Media
+      - Customer Service
+      - Listening
+      - Publishing
+      - Reporting
+      - Webhooks
+      - User Provisioning
+    properties:
+      - type: Documentation
+        url: https://dev.sprinklr.com/api-overview
+      - type: GettingStarted
+        url: https://dev.sprinklr.com/getting-started
+      - type: Authentication
+        url: https://dev.sprinklr.com/oauth-2-0-for-partners
+      - type: Webhooks
+        url: https://dev.sprinklr.com/sprinklr-webhooks
+      - type: ErrorCodes
+        url: https://dev.sprinklr.com/rest-api-error-and-status-codes
+    contact:
+      - FN: Sprinklr Developer Support
+        url: https://dev.sprinklr.com
+common:
+  - type: Website
+    url: https://www.sprinklr.com
+  - type: Documentation
+    url: https://dev.sprinklr.com/api-overview
+  - type: GettingStarted
+    url: https://dev.sprinklr.com/getting-started
+  - type: GitHubOrg
+    url: https://github.com/sprinklr-inc
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/sprinklr
+  - type: Blog
+    url: https://www.sprinklr.com/blog/
+  - type: Pricing
+    url: https://www.sprinklr.com/pricing/
+  - type: StatusPage
+    url: https://status.sprinklr.com/
+  - type: X
+    url: https://x.com/sprinklr
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/plans/sprinklr-plans-pricing.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/rate-limits/sprinklr-rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/finops/sprinklr-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

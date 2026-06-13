@@ -1,0 +1,90 @@
+name: Sprinklr Plans and Pricing
+description: Sprinklr operates on a fully enterprise sales-led model as of May 2026.
+  Self-Serve plans were discontinued on April 30, 2026. All access is negotiated through
+  Sprinklr's enterprise sales process with custom contracts. API access is included
+  for Enterprise license holders.
+url: https://www.sprinklr.com/pricing/
+plans:
+  - name: Enterprise - Service
+    description: Customer service module covering unified inbox, case management, agent
+      routing, and customer care across digital channels. Includes API access for
+      user provisioning, case data, and reporting.
+    pricing: Custom (starts ~$50,000/year; median ~$129,380/year)
+    billingCycle: Annual
+    features:
+      - Unified customer inbox
+      - Case management and routing
+      - Agent productivity tools
+      - Digital customer service across 30+ channels
+      - REST API access for user provisioning and reporting
+      - Webhook subscriptions
+      - SSO and OAuth 2.0 authentication
+    contact: https://www.sprinklr.com/demo/
+  - name: Enterprise - Social
+    description: Social media management module for publishing, engagement, listening,
+      and analytics across 30+ social and digital channels. API access covers publishing,
+      listening streams, and reporting endpoints.
+    pricing: Custom (starts ~$50,000/year; median ~$129,380/year)
+    billingCycle: Annual
+    features:
+      - Publishing across 30+ channels
+      - Social listening and monitoring
+      - Engagement and community management
+      - Reporting and analytics
+      - REST API for listening streams and publishing
+      - Webhook subscriptions
+      - Digital asset management API
+    contact: https://www.sprinklr.com/demo/
+  - name: Enterprise - Marketing
+    description: Campaign orchestration, content management, and marketing automation
+      across digital channels including WhatsApp. Includes API access for campaign
+      data and asset management.
+    pricing: Custom (negotiated per contract)
+    billingCycle: Annual
+    features:
+      - Campaign management and orchestration
+      - Content creation and approval workflows
+      - WhatsApp marketing support
+      - Influencer management
+      - REST API for campaign and asset data
+    contact: https://www.sprinklr.com/demo/
+  - name: Enterprise - Insights
+    description: Social listening and intelligence module with deep analytics, competitive
+      benchmarking, and audience insights. Includes dedicated Listening API access.
+    pricing: Custom (negotiated per contract; mention volume quotas apply)
+    billingCycle: Annual
+    features:
+      - Social listening with mention quotas
+      - Competitive intelligence
+      - Audience analysis
+      - Topic and keyword monitoring
+      - Listening Streams API access
+    contact: https://www.sprinklr.com/demo/
+  - name: Enterprise - Advertising
+    description: Paid media management module for advertising across social and digital
+      channels. Includes API access for campaign and performance data.
+    pricing: Custom (negotiated per contract)
+    billingCycle: Annual
+    features:
+      - Paid media planning and management
+      - Advertising analytics
+      - Cross-channel campaign management
+      - REST API for advertising data
+    contact: https://www.sprinklr.com/demo/
+notes:
+  - Self-Serve plans were discontinued on April 30, 2026.
+  - Enterprise contracts typically involve 3-6 months of discovery and negotiation.
+  - Implementation costs typically add $25,000-$150,000+ as a one-time fee.
+  - AI+ Studio features using Azure OpenAI, Google Vertex, or Amazon Bedrock incur
+    additional token costs.
+  - Bring-Your-Own-Key (BYOK) options available for OpenAI, Anthropic, and xAI.
+  - Renewal increases of 5-15% per year are typical.
+  - Auto-renewal with 60-90 day cancellation windows is standard.
+  - Volume-based overage fees apply for messages and mentions beyond contracted limits.
+  - API access is entitled for Enterprise license holders; no separate API tier pricing.
+  - Previous Self-Serve pricing was $249/user/month for Service or Social, $359/user/month
+    for combined Social and Customer Service.
+sources:
+  - https://chatarmin.com/en/blog/sprinklr-pricing
+  - https://socialbu.com/blog/sprinklr-pricing
+  - https://www.sprinklr.com/pricing/

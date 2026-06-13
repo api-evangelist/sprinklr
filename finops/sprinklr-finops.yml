@@ -1,0 +1,82 @@
+name: Sprinklr FinOps and API Cost Management
+description: Financial operations guidance for managing Sprinklr API costs within
+  enterprise contracts. Sprinklr pricing is fully enterprise and negotiated; cost
+  management focuses on contract optimization, AI token consumption, mention/message
+  volume governance, and avoiding overage fees.
+url: https://www.sprinklr.com/pricing/
+costDrivers:
+  - name: Base License Fee
+    description: Annual enterprise contract for licensed Sprinklr modules (Service,
+      Social, Marketing, Insights, Advertising). The primary cost driver; starting
+      around $50,000/year with a median around $129,380/year.
+    unit: Annual contract
+    typical: $50,000 - $500,000+ per year
+    notes: Negotiate carefully at initial contract; renewal increases of 5-15%/year
+      are typical.
+  - name: Implementation and Professional Services
+    description: One-time onboarding, implementation, integration, and training fees
+      charged by Sprinklr Professional Services.
+    unit: One-time engagement
+    typical: $25,000 - $150,000+
+    notes: Factor into Year 1 total cost of ownership. Can sometimes be negotiated
+      down or included in enterprise bundle.
+  - name: AI Token Costs (AI+ Studio)
+    description: AI features powered by Azure OpenAI, Google Vertex AI, or Amazon
+      Bedrock incur token consumption costs in addition to the base license. Bring-Your-Own-Key
+      (BYOK) options allow use of self-managed accounts with OpenAI, Anthropic, or
+      xAI.
+    unit: Per token (varies by AI provider and model)
+    notes: AI costs typically add 15-30% above base licensing in Year 1. Use BYOK
+      to gain cost visibility and control through your own cloud provider billing.
+  - name: Mention and Message Quotas
+    description: Social listening and customer service modules are licensed with volume
+      quotas for mentions monitored and messages processed. Overage fees apply when
+      contracted quotas are exceeded.
+    unit: Per mention / per message (varies by contract)
+    notes: Monitor monthly usage in the Sprinklr reporting dashboard to avoid surprise
+      overages. Negotiate buffer headroom in contracts for campaign spikes.
+  - name: Premium Support
+    description: Priority support, dedicated customer success management, and enhanced
+      SLAs are available as paid add-ons above standard enterprise support.
+    unit: Annual add-on fee (custom)
+    notes: Standard support is included in the base license; premium tiers are negotiated
+      separately.
+  - name: API Certificate Program
+    description: Optional chargeable developer certification program for teams building
+      on Sprinklr APIs. Available through Engagement Managers.
+    unit: Per certification cohort (custom)
+    notes: Optional; primarily relevant for large internal or partner development teams.
+costOptimization:
+  - tip: Negotiate hard at first contract signing — renewal increases (5-15%/year)
+      compound quickly, so the initial contract sets the baseline.
+  - tip: Use Bring-Your-Own-Key (BYOK) for AI features to route token costs through
+      your existing Azure, AWS, or GCP commitments and gain detailed cost visibility.
+  - tip: Monitor the Sprinklr API Usage Reporting Dashboard regularly to track mention
+      quotas, message volumes, and API call patterns before overages trigger.
+  - tip: Build in 60-90 day cancellation window awareness — set internal calendar
+      reminders well ahead of auto-renewal dates.
+  - tip: Consolidate modules where possible; bundling Service, Social, and Insights
+      into a single enterprise agreement typically yields better unit economics than
+      purchasing modules separately.
+  - tip: Request detailed usage reporting in your contract to ensure visibility into
+      AI token consumption and message/mention volumes month-over-month.
+  - tip: Use the three-tier enablement categories (Twitter Syndication, Case Compliance,
+      Listening API) strategically — only enable what is actively used to avoid unnecessary
+      complexity and support overhead.
+  - tip: For large developer teams, evaluate the API Certificate Program cost against
+      internal training alternatives to determine net value.
+contractGuidance:
+  - item: Cancellation window - 60-90 days before renewal; set reminders immediately
+      after contract signing.
+  - item: Renewal increase clauses - cap at 5% if possible; standard is 5-15%.
+  - item: Volume overages - negotiate hard caps or rollover provisions for mentions
+      and messages.
+  - item: AI token budgets - establish a separate cap for AI+ Studio to avoid unbounded
+      costs during heavy usage periods.
+  - item: Professional Services - push to include basic implementation in the base
+      contract rather than as a separate line item.
+sources:
+  - https://chatarmin.com/en/blog/sprinklr-pricing
+  - https://socialbu.com/blog/sprinklr-pricing
+  - https://www.sprinklr.com/pricing/
+  - https://www.sprinklr.com/help/articles/api/sprinklr-api-usage-reporting-dashboard/685e92d66862622c54ca0754

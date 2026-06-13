@@ -1,0 +1,60 @@
+name: Sprinklr API Rate Limits
+description: Sprinklr does not publicly publish specific numeric rate limits for its
+  REST APIs. Rate limits are enforced at the enterprise contract level and vary by
+  module, endpoint, and license tier. The platform returns HTTP 429 status codes when
+  rate limits are exceeded, which can be monitored via the Sprinklr API Usage Reporting
+  Dashboard.
+url: https://dev.sprinklr.com/api-overview
+rateLimits:
+  - scope: Platform-wide
+    description: Sprinklr enforces rate limits across all API endpoints. Specific
+      thresholds are not publicly documented and are determined by enterprise contract
+      terms and the capacity of the licensed modules.
+    httpStatusOnExceed: 429
+    monitoring: https://www.sprinklr.com/help/articles/api/sprinklr-api-usage-reporting-dashboard/685e92d66862622c54ca0754
+  - scope: Listening API
+    description: The Listening Streams API (GET /api/v2/listening/query/stream) is
+      subject to additional restrictions and requires support team enablement. Listening
+      data volumes are governed by mention quotas in the enterprise contract.
+    notes: Requires explicit enablement by Sprinklr support team.
+  - scope: Reporting API
+    description: Reporting data export APIs are subject to rate limits and may require
+      social provider use-case approval for certain data sets (e.g., Twitter/X data
+      exports).
+    notes: Twitter/X reporting exports require use-case approval from the social provider.
+  - scope: Twitter Syndication API
+    description: Access to Twitter Syndication data through Sprinklr requires explicit
+      enablement by the Sprinklr support team and is subject to Twitter/X platform
+      rate limits in addition to Sprinklr limits.
+    notes: Requires explicit enablement by Sprinklr support team.
+  - scope: Case Compliance API
+    description: The Case Compliance API requires explicit enablement by the Sprinklr
+      support team and operates under separate rate limit policies.
+    notes: Requires explicit enablement by Sprinklr support team.
+headers:
+  - name: HTTP 429 Too Many Requests
+    description: Returned when rate limits are exceeded. Monitor via the API Usage
+      Reporting Dashboard filtering on Response Status Code 429.
+errorHandling:
+  - code: 429
+    meaning: Rate limit exceeded. Clients should implement exponential backoff and
+      retry logic.
+  - code: 401
+    meaning: Unauthorized. Access token expired or invalid; re-authenticate via OAuth
+      2.0.
+  - code: 403
+    meaning: Forbidden. Insufficient permissions or feature not enabled for enterprise
+      license.
+notes:
+  - Sprinklr does not publish a public rate limit reference table.
+  - Rate limits are contract-dependent and vary by enterprise tier and module.
+  - The API Usage Reporting Dashboard provides visibility into rate limit errors (HTTP
+    429) across API calls.
+  - Contact Sprinklr support or your account team for specific rate limit quotas applicable
+    to your enterprise contract.
+  - Three API categories require explicit support team enablement and carry additional
+    restrictions - Twitter Syndication, Case Compliance API, and Listening API.
+sources:
+  - https://dev.sprinklr.com/api-overview
+  - https://www.sprinklr.com/help/articles/api/sprinklr-api-usage-reporting-dashboard/685e92d66862622c54ca0754
+  - https://dev.sprinklr.com/rest-api-error-and-status-codes
