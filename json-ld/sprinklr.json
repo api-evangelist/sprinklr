@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.sprinklr.com",
+  "name": "Sprinklr",
+  "description": "Sprinklr is a unified customer experience management (Unified-CXM) platform offering REST APIs for social media management, customer service, marketing, and advertising across 30+ digital channels.",
+  "url": "https://www.sprinklr.com",
+  "sameAs": [
+    "https://github.com/sprinklr-inc",
+    "https://www.linkedin.com/company/sprinklr",
+    "https://x.com/sprinklr"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Developer Support",
+    "url": "https://dev.sprinklr.com"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Sprinklr API",
+    "description": "RESTful APIs for integrating with the Sprinklr Unified-CXM platform, covering social listening, publishing, reporting, user provisioning, digital asset management, and webhook subscriptions across 30+ digital channels.",
+    "url": "https://dev.sprinklr.com/api-overview"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dev.sprinklr.com/api-overview",
+    "name": "Sprinklr Developer Portal",
+    "url": "https://dev.sprinklr.com/api-overview"
+  }
+}
