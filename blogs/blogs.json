@@ -44,5 +44,17 @@
       "date": "2025-11-28",
       "description": "Comprehensive guide examining different enterprise AI agent categories and selection criteria."
     }
-  ]
+  ],
+  "repo": "sprinklr",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/sprinklr",
+      "feed_url": "https://www.linkedin.com/company/sprinklr",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
