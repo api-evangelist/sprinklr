@@ -5,7 +5,7 @@ description: Sprinklr is a unified customer experience management (Unified-CXM) 
   advertising across 30+ digital channels. APIs support listening, publishing, reporting,
   user provisioning, digital asset management, and webhook integrations, all secured
   via OAuth 2.0 and accessible to enterprise license holders.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -26,7 +26,7 @@ apis:
     description: RESTful APIs for integrating with the Sprinklr Unified-CXM platform,
       covering social listening, publishing, reporting, user provisioning, digital
       asset management, and webhook subscriptions across 30+ digital channels.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://dev.sprinklr.com/api-overview
     baseURL: https://api3.sprinklr.com
     tags:
