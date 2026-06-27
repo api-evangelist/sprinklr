@@ -1,60 +1,14 @@
 {
-  "meta": {
-    "source": "https://www.sprinklr.com/blog/",
-    "fetched": "2026-06-13",
-    "provider": "sprinklr"
-  },
-  "blogs": [
-    {
-      "title": "50+ Agentic AI Terms No One Explains Clearly Today",
-      "url": "https://www.sprinklr.com/blog/agentic-ai-terms/",
-      "date": "2026-06-01",
-      "author": "Bhavya Aggarwal",
-      "description": "Demystifies complex agentic AI terminology with clear, accessible explanations."
-    },
-    {
-      "title": "The Best AI Tools for Customer Service in 2026",
-      "url": "https://www.sprinklr.com/blog/ai-tools-for-customer-service/",
-      "date": "2026-06-10",
-      "author": "Aksheeta Tyagi",
-      "description": "Reviews and compares leading AI-powered solutions for improving customer support operations."
-    },
-    {
-      "title": "Close the Loop, Move the Needle: A Unified VoC Strategy That Works",
-      "url": "https://www.sprinklr.com/blog/close-the-loop-unified-voc-strategy/",
-      "date": "2026-03-05",
-      "author": "Sravani Gade",
-      "description": "Explores how to implement a comprehensive Voice of Customer strategy that drives measurable business impact."
-    },
-    {
-      "title": "Social Media Conversions: Turning Engagement into Revenue",
-      "url": "https://www.sprinklr.com/blog/social-media-conversion/",
-      "date": "2026-02-19",
-      "description": "Addresses strategies for converting social media engagement metrics into actual revenue generation."
-    },
-    {
-      "title": "Social Media Trends 2026: What Brands Must Prepare For",
-      "url": "https://www.sprinklr.com/blog/social-media-trends/",
-      "date": "2025-12-23",
-      "description": "Forecasts emerging social media trends and prepares brands for upcoming platform changes."
-    },
-    {
-      "title": "AI Agents in the Enterprise: Types, Use Cases, and How to Choose the Right One",
-      "url": "https://www.sprinklr.com/blog/types-of-ai-agents/",
-      "date": "2025-11-28",
-      "description": "Comprehensive guide examining different enterprise AI agent categories and selection criteria."
-    }
-  ],
   "repo": "sprinklr",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/sprinklr",
-      "feed_url": "https://www.linkedin.com/company/sprinklr",
-      "title": "",
+      "source": "https://www.sprinklr.com/blog/",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T13:11:59Z",
+  "post_count": 7,
+  "agent_pulled": "2026-06-27"
 }
