@@ -2,13 +2,18 @@
   "repo": "sprinklr",
   "feeds": [
     {
-      "source": "https://www.sprinklr.com/blog/",
-      "feed_url": "",
+      "source": "https://www.sprinklr.com/blog/feed/",
+      "feed_url": "https://www.sprinklr.com/blog/feed/",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
+    },
+    {
+      "source": "https://www.linkedin.com/company/sprinklr",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T13:11:59Z",
-  "post_count": 7,
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 14,
   "agent_pulled": "2026-06-27"
 }
