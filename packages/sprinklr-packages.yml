@@ -1,0 +1,92 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://registry.npmjs.org (scope search + per-package metadata),
+  https://github.com/sprinklr-inc, https://dev.sprinklr.com/sdks
+note: >-
+  Sprinklr ships no server-side REST client library in any language. There is no
+  Sprinklr package on PyPI, RubyGems, crates.io or Packagist, and the GitHub org
+  github.com/sprinklr-inc holds only five repos, none of which is a REST SDK.
+  What Sprinklr does publish is a browser/embed-side JavaScript family under the
+  @sprinklrjs npm scope, tied to the "Sprinklr Apps" extensibility model and the
+  Live Chat / CFM embeds documented at dev.sprinklr.com/sdks. First-party is
+  established by github.com/sprinklr-inc/create-sprinklr-app, which is the
+  source repo for @sprinklrjs/create-sprinklr-app. Every one of these packages
+  is stale relative to the API it wraps: the newest release is 2025-11-26 and
+  three of the four last shipped in 2022 or 2024, while the REST API changelog
+  was still adding endpoints in Q1 2026.
+registries_checked:
+  - {registry: npm, result: 4 first-party packages under @sprinklrjs}
+  - {registry: pypi, result: none, probe: 'https://pypi.org/pypi/sprinklr/json -> 404'}
+  - {registry: rubygems, result: none}
+  - {registry: crates.io, result: none}
+  - {registry: packagist, result: none}
+  - {registry: maven-central, result: 'none first-party; sprinklr-inc/twitter4j-ads is a Twitter4J fork, not a Sprinklr API client'}
+  - {registry: nuget, result: none}
+  - {registry: pkg.go.dev, result: none}
+packages:
+  - language: javascript
+    registry: npm
+    name: "@sprinklrjs/create-sprinklr-app"
+    url: https://www.npmjs.com/package/@sprinklrjs/create-sprinklr-app
+    install: npm create @sprinklrjs/sprinklr-app
+    description: CLI tool to bootstrap a Sprinklr App that can be installed as an external app in the Sprinklr platform.
+    bin: [create-sprinklr-app]
+    official: true
+    official_evidence: https://github.com/sprinklr-inc/create-sprinklr-app
+    version: 2.1.2
+    published: '2024-10-18'
+  - language: javascript
+    registry: npm
+    name: "@sprinklrjs/integration-sdk"
+    url: https://www.npmjs.com/package/@sprinklrjs/integration-sdk
+    install: npm install @sprinklrjs/integration-sdk
+    description: TypeScript SDK enabling communication between Sprinklr's agent interface and an embedded external application.
+    official: true
+    version: 0.0.3
+    published: '2025-11-26'
+  - language: javascript
+    registry: npm
+    name: "@sprinklrjs/app-sdk"
+    url: https://www.npmjs.com/package/@sprinklrjs/app-sdk
+    install: npm install @sprinklrjs/app-sdk
+    description: SDK to interact with a Sprinklr application from an external application.
+    official: true
+    version: 1.0.0
+    published: '2024-07-30'
+  - language: javascript
+    registry: npm
+    name: "@sprinklrjs/business-components-react"
+    url: https://www.npmjs.com/package/@sprinklrjs/business-components-react
+    install: npm install @sprinklrjs/business-components-react
+    description: React components that external applications can embed in their own apps.
+    official: true
+    prerelease: true
+    version: 0.0.18-beta.2
+    published: '2022-08-02'
+not_first_party:
+  - name: sprinklr-mcp
+    registry: npm
+    url: https://www.npmjs.com/package/sprinklr-mcp
+    version: 0.1.0
+    published: '2026-04-06'
+    note: Third-party community MCP wrapper (github.com/daiict218/sprinklr-mcp). Not published by Sprinklr.
+  - name: botium-connector-sprinklr
+    registry: npm
+    version: 0.0.4
+    published: '2026-06-12'
+    note: Botium test-framework connector maintained by Code for Equity, not Sprinklr.
+  - name: sprinklr
+    registry: npm
+    version: 0.2.1
+    published: '2015-12-13'
+    note: Unrelated package squatting the name; no connection to Sprinklr, Inc.
+mobile_sdks:
+  note: >-
+    dev.sprinklr.com/sdks documents Live Chat, Headless Live Chat and CFM SDKs
+    for web, iOS and Android, but publishes no public registry coordinate
+    (no CocoaPods pod, no Maven Central groupId, no distribution URL) for any of
+    them; they are delivered to licensed customers. Recorded in
+    components/sprinklr-components.yml, not here.
+  version: null
+  published: null

@@ -1,0 +1,65 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/faqs
+docs:
+  - https://dev.sprinklr.com/faqs
+  - https://dev.sprinklr.com/getting-started
+  - https://dev.sprinklr.com/api-key-and-secret-generation
+available: true
+self_service: false
+description: >-
+  Sprinklr publishes a Sandbox environment, but it is an entitlement, not a
+  public playground. There is no anonymous test mode, no test-key prefix, and no
+  set of magic test values. Sandbox is a separate Sprinklr tenant provisioned
+  under the enterprise contract; it uses the SAME environment host and the SAME
+  API key/secret as production, and the two are told apart only by which
+  authorization token was issued.
+provider_statement: >-
+  "Sandbox is a testing environment, which is independent of the live production
+  environment. It can be used for implementation, training, development, and
+  testing. Having access to the Sandbox environment prevents human error, and
+  makes it easy to test and try new capabilities and product features. Sprinklr
+  Sandbox supports all the APIs available on the developer portal."
+  — https://dev.sprinklr.com/faqs
+test_vs_live:
+  separation_mechanism: authorization-token
+  key_prefixes: []
+  key_prefix_note: >-
+    Sprinklr uses NO test/live key prefix. Per the API key generation docs: "The
+    environment for Sandbox and Production would be the same. The authorization
+    token will be the unique identifier to validate whether the token belongs to
+    Sandbox or Production." A caller cannot tell from a credential alone which
+    tenant it will hit — a genuine safety gap for an autonomous agent.
+  same_base_url: true
+  same_api_key: true
+  provider_statement: 'From the getting-started page: "The generated key and token will work for Sandbox environments as well."'
+coverage:
+  apis: all
+  note: Sprinklr states Sandbox supports every API available on the developer portal.
+test_values:
+  cards: []
+  accounts: []
+  identifiers: []
+  note: >-
+    NO magic test values are published — no test card numbers, no test phone
+    numbers or profile IDs, no simulator identifiers, no fixture triggers, no
+    time/clock simulation. Sandbox is a real tenant seeded with the customer's
+    own data. Nothing is invented here.
+time_simulation:
+  supported: false
+fixtures:
+  supported: false
+access:
+  how: Provisioned through the enterprise contract; request through your Sprinklr account or success manager.
+  public_signup: false
+  developer_portal_signup:
+    url: https://dev.sprinklr.com/
+    note: >-
+      Anyone may register on the developer portal and create an app to mint an
+      API key and secret, but the OAuth flow that turns that key into a usable
+      token requires an existing licensed Sprinklr platform account. Registering
+      alone gets you credentials that cannot call anything.
+gaps:
+  - No self-service sandbox; no way for an unlicensed developer to make a single successful API call.
+  - No credential-level distinction between sandbox and production.
+  - No published test data, fixtures or simulation tooling.

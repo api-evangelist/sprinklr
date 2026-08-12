@@ -1,0 +1,37 @@
+generated: '2026-08-12'
+method: searched
+source: https://github.com/sprinklr-inc/create-sprinklr-app
+docs: https://www.npmjs.com/package/@sprinklrjs/create-sprinklr-app
+name: create-sprinklr-app
+description: >-
+  Sprinklr's only first-party command-line tool. It is a scaffolding CLI, not an
+  API client: it bootstraps a "Sprinklr App" project — an external application
+  that is installed into the Sprinklr platform and embedded in the agent
+  interface — wiring up @sprinklrjs/app-sdk and @sprinklrjs/integration-sdk. It
+  does NOT expose the REST API (there is no `sprinklr api` / `sprinklr cases`
+  style command surface, no token management, no webhook forwarding, no event
+  triggering).
+scope: scaffolding
+covers_rest_api: false
+install:
+  - method: npm
+    command: npm create @sprinklrjs/sprinklr-app
+  - method: npx
+    command: npx @sprinklrjs/create-sprinklr-app
+package: "@sprinklrjs/create-sprinklr-app"
+package_ref: packages/sprinklr-packages.yml
+version: 2.1.2
+published: '2024-10-18'
+source_repo: https://github.com/sprinklr-inc/create-sprinklr-app
+language: TypeScript
+commands:
+  - name: create-sprinklr-app
+    description: Interactive project generator for a Sprinklr App; prompts for app name and template, then emits a runnable scaffold.
+    note: >-
+      The published package declares a single bin entry. Sprinklr publishes no
+      command reference page, so no subcommand list is asserted here — only the
+      one binary the npm manifest actually declares.
+gaps:
+  - No CLI for authenticating against api3.sprinklr.com or generating OAuth tokens.
+  - No CLI for creating, verifying or replaying webhook subscriptions.
+  - Last release 2024-10-18; the source repo was last pushed 2024-01-16.

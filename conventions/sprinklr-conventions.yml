@@ -1,0 +1,151 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/api-overview
+docs:
+  - https://dev.sprinklr.com/api-overview
+  - https://dev.sprinklr.com/getting-started
+  - https://dev.sprinklr.com/faqs
+  - https://dev.sprinklr.com/rest-api-error-and-status-codes
+  - https://dev.sprinklr.com/sprinklr-api-rate-limiting
+description: >-
+  Cross-cutting request/response semantics for the Sprinklr REST APIs, read from
+  the developer portal. Sprinklr has no OpenAPI, so nothing here is derived from
+  a spec; every item below is a published statement or a documented example.
+authentication:
+  style: oauth2-bearer-plus-api-key
+  headers: [Authorization, key]
+  detail: authentication/sprinklr-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    NO IDEMPOTENCY CONTRACT. Sprinklr documents no idempotency key, no
+    request-replay semantics and no safe-retry guarantee for writes anywhere in
+    the developer portal. The 409 Conflict it does document is optimistic
+    concurrency on a resource `version` field, not idempotent replay. Sprinklr's
+    own retry guidance (exponential backoff on 429) therefore asks clients to
+    re-issue writes with no duplicate-suppression contract behind them. No
+    `Idempotency` pointer is emitted for this provider — the artifact records
+    the absence.
+  evidence:
+    - 'Full-text read of all 18 developer-portal doc pages on 2026-08-12: zero occurrences of "idempoten".'
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  pattern: 'https://api3.sprinklr.com/{env}/api/v2/{resource}'
+  policy: >-
+    v2 launched late 2019 and is built on standard business objects (Message,
+    Case, Profile, Task) mirroring the webhook model. v1 remains available;
+    Sprinklr recommends v2 for new integrations. The same API key and token work
+    across both versions.
+  docs: https://dev.sprinklr.com/api2-0
+  header_versioning: false
+environment_routing:
+  required: true
+  style: path-segment
+  pattern: '/{env}/'
+  detail: >-
+    Every Sprinklr customer is pinned to a hosting environment (prod, prod2,
+    prod3, prod4, prod8, ...). The environment is a path segment on api3, and is
+    omitted only for the default Production environment. Keys and tokens are
+    environment-scoped; a mismatch returns HTTP 421 Misdirected Request. This is
+    the single most consequential Sprinklr-specific convention for an
+    integration or an agent: the base URL is not knowable from the docs alone,
+    it must be read from the customer's own Sprinklr UI page source
+    (search for "sentry-environment").
+content_negotiation:
+  request_media_type: application/json
+  response_media_type: application/json
+  oauth_token_media_type: application/x-www-form-urlencoded
+  required_headers:
+    - {name: Content-Type, value: application/json, note: Required on bodied requests.}
+    - {name: Content-Length, note: 'Required on POST/PUT; send 0 when there is no body, or the call returns HTTP 411.'}
+methods:
+  - {method: POST, semantics: create a new resource (includes request body)}
+  - {method: GET, semantics: fetch details for a resource}
+  - {method: PUT, semantics: full update (includes request body)}
+  - {method: PATCH, semantics: partial update (includes request body)}
+  - {method: DELETE, semantics: delete an existing resource}
+patch_semantics:
+  standard: SCIM 2.0 PATCH
+  note: >-
+    The Partial Update User (SCIM) API follows the SCIM 2.0 PATCH standard with
+    add and replace operations, and since Q1 2026 supports dot notation for
+    nested attributes (e.g. name.familyName). This is the only place Sprinklr
+    binds itself to an external PATCH standard.
+pagination:
+  documented: false
+  note: >-
+    No cross-cutting pagination contract is published. Sprinklr documents
+    per-API search/fetch endpoints (Search by Entity, Search Messages, Search
+    Users Using Time Filter) but no portal page states a shared cursor/offset
+    parameter set or a shared response envelope for page metadata. Recorded as
+    absent rather than guessed.
+response_envelope:
+  success:
+    shape: {data: object-or-array}
+    example_fields: [data]
+    note: >-
+      Documented responses wrap the payload in a top-level `data` key — e.g. the
+      /api/v2/me example and the webhook subscription response.
+  error:
+    shape: {success: false, errors: [{code, message, details}]}
+    detail: errors/sprinklr-problem-types.yml
+concurrency:
+  mechanism: resource-version-field
+  field: version
+  failure_status: 409
+  note: >-
+    Case and similar entities carry an integer `version`. Updating with a stale
+    version returns 409 Conflict. No ETag / If-Match header contract is
+    published.
+conditional_requests:
+  if_modified_since:
+    mentioned: true
+    note: >-
+      The rate-limiting page recommends "smart polling with If-Modified-Since"
+      as a mitigation, but no endpoint reference states which resources honour
+      it. Treat as advisory, not contractual.
+rate_limit_signalling:
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, Retry-After]
+  endpoint_rule_headers: [x-ratelimit-limit, x-ratelimit-reset, x-ratelimit-rule-id, retry-after]
+  exhaustion_statuses: [429, 403]
+  detail: rate-limits/sprinklr-rate-limits.yml
+request_tracing:
+  request_id_header: null
+  note: >-
+    No client-facing request-id header is documented. The Apigee gateway error
+    envelope observed on 401 responses carries `id` and `request_id` fields in
+    the body, which is the only correlation handle a caller gets, and it is not
+    documented as such.
+bulk_operations:
+  supported: true
+  note: >-
+    Sprinklr added Create Custom Entity - Bulk and Bulk Update User Profiles in
+    Q1 2026, and Bulk Import Entity is a listed v2 API family. The rate-limit
+    guidance explicitly directs clients to batch (up to 50 IDs in one POST)
+    rather than loop.
+custom_fields:
+  mechanism: customProperties
+  note: >-
+    Entities carry a `customProperties` map keyed by opaque 24-hex custom-field
+    IDs (e.g. "5d42c773c7a0e3543eea8cdc") plus namespaced keys like
+    "spr_uc_type". Custom fields are created through the Custom Field API and
+    the returned {Id} becomes the property key. An agent cannot interpret a
+    Sprinklr payload without first resolving these IDs.
+governance_model:
+  note: >-
+    API authorization is a direct projection of the Sprinklr platform's user
+    governance model. Four user types exist — Partner Admin (highest), Partner
+    User, Client Admin, Client User (lowest) — and client-level roles override
+    partner-level within a client environment. The same call made by two users
+    returns different data or a 400/403 depending on their assigned roles and
+    workspaces. Token scope is set at consent time by choosing the partner and
+    client environment combination.
+cross_references:
+  authentication: authentication/sprinklr-authentication.yml
+  errors: errors/sprinklr-problem-types.yml
+  rate_limits: rate-limits/sprinklr-rate-limits.yml
+  lifecycle: lifecycle/sprinklr-lifecycle.yml
+  webhooks: asyncapi/sprinklr-webhooks.yml

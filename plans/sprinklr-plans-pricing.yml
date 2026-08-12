@@ -1,9 +1,32 @@
 name: Sprinklr Plans and Pricing
+generated: '2026-08-12'
+method: searched
+source: https://www.sprinklr.com/demo/
+published_plan_count: 0
+plan_count: 5
 description: Sprinklr operates on a fully enterprise sales-led model as of May 2026.
   Self-Serve plans were discontinued on April 30, 2026. All access is negotiated through
   Sprinklr's enterprise sales process with custom contracts. API access is included
   for Enterprise license holders.
-url: https://www.sprinklr.com/pricing/
+url: https://www.sprinklr.com/demo/
+provenance:
+  published_pricing_page: false
+  probe:
+    - {url: 'https://www.sprinklr.com/pricing/', status: 404, checked: '2026-08-12'}
+    - {url: 'https://www.sprinklr.com/pricing', status: 404, checked: '2026-08-12'}
+    - {url: 'https://www.sprinklr.com/plans/', status: 404, checked: '2026-08-12'}
+    - {url: 'https://www.sprinklr.com/products/pricing', status: 404, checked: '2026-08-12'}
+    - {url: 'https://www.sprinklr.com/demo/', status: 200, checked: '2026-08-12'}
+  note: >-
+    SPRINKLR PUBLISHES NO PRICING PAGE. https://www.sprinklr.com/pricing/ — the
+    URL this repo previously carried as its Pricing pointer — returns HTTP 404,
+    and Sprinklr's own llms.txt (its agent-facing site index, 54KB, 200+ links)
+    contains not one occurrence of the word "pricing". The only published route
+    to a price is the demo/contact form. Therefore published_plan_count is 0.
+    The five tiers below are NOT Sprinklr-published price points: the tier NAMES
+    and their capability lists come from Sprinklr's own product-suite pages, but
+    every dollar figure is a third-party estimate from the reseller/analyst
+    blogs listed in `sources`. Treat the numbers as indicative only.
 plans:
   - name: Enterprise - Service
     description: Customer service module covering unified inbox, case management, agent

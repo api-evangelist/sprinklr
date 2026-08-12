@@ -1,0 +1,122 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/authorize
+note: >-
+  Standards conformance read from the Sprinklr developer portal and the Sprinklr
+  Trust Center. No OpenAPI exists for this provider, so nothing is derived from
+  a spec; each entry cites a published statement or a live probe.
+standards:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Authorization Code, Client Credentials and JWT certificate-based flows
+      documented at https://dev.sprinklr.com/authorize with
+      /oauth/authorize and /oauth/token endpoints and standard grant_type,
+      client_id, client_secret, redirect_uri, code and refresh_token parameters.
+  - id: rfc8414-oauth-authorization-server-metadata
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: false
+    evidence: '/.well-known/oauth-authorization-server returns 404 on api3.sprinklr.com and www.sprinklr.com (probed 2026-08-12).'
+  - id: rfc9728-oauth-protected-resource-metadata
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: false
+    evidence: '/.well-known/oauth-protected-resource returns 404 on every Sprinklr host (probed 2026-08-12).'
+  - id: oidc
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: '/.well-known/openid-configuration returns 404 on every Sprinklr host (probed 2026-08-12). SSO for Partners is documented but no OIDC discovery document is served.'
+  - id: scim2
+    name: SCIM 2.0 (RFC 7643 / 7644)
+    conforms: partial
+    evidence: >-
+      Sprinklr ships a "SCIM (User) API" in both v1 and v2, and the Partial
+      Update User (SCIM) API added in Q4 2025 "follows the SCIM 2.0 PATCH
+      standard and supports operations such as add and replace" over name,
+      active, locale, emails, client attributes and custom properties. Marked
+      partial because Sprinklr publishes no /ServiceProviderConfig,
+      /ResourceTypes or /Schemas discovery endpoints and the SCIM surface sits
+      under the Sprinklr path scheme rather than a SCIM base URL.
+  - id: mutual-tls
+    name: Mutual TLS client authentication
+    conforms: true
+    evidence: '"Mutual TLS Authentication" is a documented authorization method in the developer portal Authorize section.'
+  - id: rfc9116-security-txt
+    name: security.txt
+    conforms: true
+    evidence: 'https://www.sprinklr.com/.well-known/security.txt returns 200 text/plain, PGP-signed, with Contact, Policy, Encryption, Preferred-Languages and Hiring.'
+    deviation: 'Expires is 2026-01-01T06:29:00.000Z — in the past as of the probe, which RFC 9116 section 2.5.5 forbids.'
+  - id: rfc9457-problem-details
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Sprinklr returns a custom {success, errors[]} JSON envelope; no
+      application/problem+json media type and no type/instance members appear
+      anywhere in the published error reference.
+  - id: rfc6585-429
+    name: HTTP 429 Too Many Requests
+    conforms: true
+    evidence: 'Documented 429 with Retry-After at https://dev.sprinklr.com/sprinklr-api-rate-limiting.'
+    deviation: 'Rate-limit exhaustion is ALSO signalled as 403 "Developer Over Rate", which is not RFC 6585 behaviour.'
+  - id: ratelimit-headers
+    name: RateLimit header fields for HTTP
+    conforms: partial
+    evidence: 'X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset are returned on every response.'
+    deviation: 'Uses the legacy X- prefixed family, not the IETF draft RateLimit-Limit/RateLimit-Remaining/RateLimit-Reset fields.'
+  - id: rfc8594-sunset
+    name: Sunset HTTP header
+    conforms: false
+    evidence: 'No Sunset or Deprecation header is documented; deprecations are announced only in prose on the changelog and reference pages.'
+  - id: openapi
+    name: OpenAPI Specification
+    conforms: false
+    evidence: >-
+      No OpenAPI is published. Probed /openapi.json, /openapi.yaml,
+      /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc on
+      api3.sprinklr.com (all 404) and on dev.sprinklr.com (all HTTP 200 SPA
+      shell). The Apigee developer-portal API listed 20 API products, all with
+      specId "apigee" and no retrievable spec snapshot (404 on every
+      /liveportal/apis/{id}/spec). Sprinklr does support OpenAPI as a CONSUMER —
+      its API Extension feature ingests third-party OpenAPI — but publishes none
+      for its own APIs.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: 'No AsyncAPI document; the webhook surface is prose-only. See asyncapi/sprinklr-webhooks.yml.'
+  - id: graphql
+    name: GraphQL
+    conforms: false
+    evidence: 'No GraphQL endpoint documented or discoverable on any Sprinklr host.'
+  - id: mcp
+    name: Model Context Protocol
+    conforms: partial
+    evidence: >-
+      Sprinklr MCP (Beta) announced 2026-07-15 in the Sprinklr newsroom, and a
+      Model Context Protocol Tool exists inside the platform for consuming
+      external MCP servers. No public endpoint, transport or tools/list is
+      published. See mcp/sprinklr-mcp.yml.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: '/.well-known/agent-card.json and /.well-known/agent.json return 404 on www, api3, community, status and investors hosts (probed 2026-08-12). No card exists.'
+  - id: llms-txt
+    name: llms.txt
+    conforms: true
+    evidence: 'https://www.sprinklr.com/llms.txt returns 200 text/plain — a 54KB structured index of the Sprinklr site including a Developers Resources section.'
+    deviation: >-
+      The llms.txt Developers Resources section points agents at
+      https://dev.sprinklr.com/docs/rest-apis/ and
+      https://dev.sprinklr.com/docs/webhooks/, neither of which is a real route
+      in the developer portal's 35-page sitemap; both resolve to the Angular SPA
+      shell. The provider's agent-facing index names URLs its own portal does
+      not serve.
+compliance_program:
+  published: true
+  url: https://trust.sprinklr.com/
+  certifications: [SOC 2, ISO 27001, PCI DSS, HIPAA, FedRAMP, GDPR]
+  detail: security/sprinklr-trust-center.yml
+coverage:
+  asserted: 18
+  conforms_true: 5
+  conforms_partial: 4
+  conforms_false: 9

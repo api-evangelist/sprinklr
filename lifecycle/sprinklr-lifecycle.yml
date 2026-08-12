@@ -1,0 +1,91 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/changelog
+docs:
+  - https://dev.sprinklr.com/changelog
+  - https://dev.sprinklr.com/api2-0
+  - https://dev.sprinklr.com/api1-0
+  - https://dev.sprinklr.com/live-chat-application-apis
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  since: '2019'
+  docs: https://dev.sprinklr.com/api2-0
+  migration_guidance: >-
+    Sprinklr publishes v1 to v2 migration best practice in its FAQ: the same API
+    key and authorization token work for both; only endpoint paths and payloads
+    change. v1 customers "can continue to do so until they wish to make a
+    switch" — there is no announced end-of-life date for v1.
+deprecation:
+  policy_url: https://dev.sprinklr.com/changelog
+  policy_published: false
+  policy_note: >-
+    Sprinklr names "API deprecation" as one of the four change classes its
+    changelog records, and it does announce individual deprecations there and on
+    the affected reference pages. What it does NOT publish is a deprecation
+    POLICY: no notice period, no support window, no end-of-life calendar, and no
+    RFC 8594 Sunset/Deprecation response headers.
+  sunset_header: false
+  deprecation_header: false
+  announced_via: [changelog, in-page notice]
+deprecated_surfaces:
+  - name: Live Chat Application APIs
+    status: no-longer-supported
+    announced_at: https://dev.sprinklr.com/live-chat-application-apis
+    quote: >-
+      "The Live Chat APIs are no longer supported. Existing implementations will
+      not be impacted. For new implementations, use the Live Chat Headless SDK."
+    replacement: Headless Live Chat SDK (https://dev.sprinklr.com/headless-live-chat-sdk)
+    sunset_date: null
+    operations_affected: 17
+  - name: API v1
+    status: legacy-maintained
+    announced_at: https://dev.sprinklr.com/api1-0
+    quote: >-
+      "Customers using API v1 can continue to do so until they wish to make a
+      switch. However, we recommend using the latest API v2 version for
+      implementing new integrations."
+    replacement: API v2
+    sunset_date: null
+  - name: Legacy developer-portal key generation
+    status: superseded
+    announced_at: https://dev.sprinklr.com/api-key-and-secret-generation
+    quote: >-
+      "This process replaces the legacy credential generation workflow. Existing
+      API Keys and Secrets created through the legacy process remain valid."
+    replacement: 'Developer Tools in Sprinklr (All Settings > APIs and Integrations > Developer Tools), 26.1 release onward'
+    sunset_date: null
+release_train:
+  cadence: quarterly platform releases
+  naming: 'YY.N (e.g. 26.1, 26.4 Spring ''26, 26.7 Summer ''26)'
+  notes_url: https://www.sprinklr.com/releases/26-7-release/
+  api_changelog_lag: >-
+    The platform shipped 26.7 on 2026-07-15 but the API changelog's newest
+    quarter is still Jan-Mar 2026, so the API changelog trails the release train
+    by at least one quarter.
+status_page:
+  url: https://status.sprinklr.com/
+  provider: Atlassian Statuspage
+  machine_readable: https://status.sprinklr.com/api/v2/summary.json
+  probe: {url: 'https://status.sprinklr.com/api/v2/summary.json', status: 200, checked: '2026-08-12'}
+  components_note: >-
+    Status is reported per hosting environment (e.g. "APAC (Prod4)"), which
+    matches the per-environment base-URL model — a caller must know which
+    environment they are pinned to in order to read their own status.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime target. Sprinklr is enterprise-contract only; service
+    levels are negotiated per agreement. Premium support with enhanced SLAs is
+    sold as an add-on.
+support:
+  email: tickets@sprinklr.com
+  community: https://community.sprinklr.com/
+  help_center: https://www.sprinklr.com/help/
+gaps:
+  - No RFC 8594 Sunset or Deprecation headers.
+  - No published notice period or end-of-life date for any deprecated surface.
+  - No public SLA.
+  - API changelog one full quarter behind the platform release train.

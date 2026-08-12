@@ -1,0 +1,143 @@
+generated: '2026-08-12'
+method: probed
+source: live GET probes of every Sprinklr host in apis.yml
+note: >-
+  Only www.sprinklr.com serves a real /.well-known document — an RFC 9116
+  security.txt, PGP-signed, whose Expires field (2026-01-01) is already in the
+  past. api3.sprinklr.com (the API host) returns a hard 404 on every
+  /.well-known path. dev.sprinklr.com is an Angular single-page developer
+  portal whose catch-all answers HTTP 200 with the SPA HTML shell for EVERY
+  /.well-known path, so none of its 200s are documents; they are recorded as
+  misses. No agent card, no OIDC discovery, no OAuth authorization-server
+  metadata and no api-catalog is published on any host.
+hosts:
+  - host: https://www.sprinklr.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        file: sprinklr-security.txt
+        document: true
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+  - host: https://api3.sprinklr.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+  - host: https://dev.sprinklr.com
+    note: >-
+      SPA catch-all: every path below returned HTTP 200 with Content-Type
+      text/html and the Angular shell as the body. Treated as a miss, not a hit.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/api-catalog
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+      - path: /.well-known/agent.json
+        status: 200
+        content_type: text/html
+        document: false
+        spa_shell: true
+  - host: https://community.sprinklr.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+security_txt:
+  file: sprinklr-security.txt
+  url: https://www.sprinklr.com/.well-known/security.txt
+  signed: true
+  signature: PGP SIGNED MESSAGE (SHA256)
+  contact:
+    - mailto:security@sprinklr.com
+  policy: https://www.sprinklr.com/responsible-disclosure/
+  encryption: https://www.sprinklr.com/pgp-key.txt
+  preferred_languages: en
+  hiring: https://www.sprinklr.com/careers/
+  expires: '2026-01-01T06:29:00.000Z'
+  expired: true
+  expired_note: >-
+    RFC 9116 requires the Expires field to be in the future; as of the 2026-08-12
+    probe this document has been expired for over seven months.
+x-evidence:
+  fetched: '2026-08-12'
+  hits: 1
+  misses: 27

@@ -1,60 +1,142 @@
 name: Sprinklr API Rate Limits
-description: Sprinklr does not publicly publish specific numeric rate limits for its
-  REST APIs. Rate limits are enforced at the enterprise contract level and vary by
-  module, endpoint, and license tier. The platform returns HTTP 429 status codes when
-  rate limits are exceeded, which can be monitored via the Sprinklr API Usage Reporting
-  Dashboard.
-url: https://dev.sprinklr.com/api-overview
-rateLimits:
-  - scope: Platform-wide
-    description: Sprinklr enforces rate limits across all API endpoints. Specific
-      thresholds are not publicly documented and are determined by enterprise contract
-      terms and the capacity of the licensed modules.
-    httpStatusOnExceed: 429
-    monitoring: https://www.sprinklr.com/help/articles/api/sprinklr-api-usage-reporting-dashboard/685e92d66862622c54ca0754
-  - scope: Listening API
-    description: The Listening Streams API (GET /api/v2/listening/query/stream) is
-      subject to additional restrictions and requires support team enablement. Listening
-      data volumes are governed by mention quotas in the enterprise contract.
-    notes: Requires explicit enablement by Sprinklr support team.
-  - scope: Reporting API
-    description: Reporting data export APIs are subject to rate limits and may require
-      social provider use-case approval for certain data sets (e.g., Twitter/X data
-      exports).
-    notes: Twitter/X reporting exports require use-case approval from the social provider.
-  - scope: Twitter Syndication API
-    description: Access to Twitter Syndication data through Sprinklr requires explicit
-      enablement by the Sprinklr support team and is subject to Twitter/X platform
-      rate limits in addition to Sprinklr limits.
-    notes: Requires explicit enablement by Sprinklr support team.
-  - scope: Case Compliance API
-    description: The Case Compliance API requires explicit enablement by the Sprinklr
-      support team and operates under separate rate limit policies.
-    notes: Requires explicit enablement by Sprinklr support team.
-headers:
-  - name: HTTP 429 Too Many Requests
-    description: Returned when rate limits are exceeded. Monitor via the API Usage
-      Reporting Dashboard filtering on Response Status Code 429.
-errorHandling:
-  - code: 429
-    meaning: Rate limit exceeded. Clients should implement exponential backoff and
-      retry logic.
-  - code: 401
-    meaning: Unauthorized. Access token expired or invalid; re-authenticate via OAuth
-      2.0.
-  - code: 403
-    meaning: Forbidden. Insufficient permissions or feature not enabled for enterprise
-      license.
-notes:
-  - Sprinklr does not publish a public rate limit reference table.
-  - Rate limits are contract-dependent and vary by enterprise tier and module.
-  - The API Usage Reporting Dashboard provides visibility into rate limit errors (HTTP
-    429) across API calls.
-  - Contact Sprinklr support or your account team for specific rate limit quotas applicable
-    to your enterprise contract.
-  - Three API categories require explicit support team enablement and carry additional
-    restrictions - Twitter Syndication, Case Compliance API, and Listening API.
-sources:
-  - https://dev.sprinklr.com/api-overview
-  - https://www.sprinklr.com/help/articles/api/sprinklr-api-usage-reporting-dashboard/685e92d66862622c54ca0754
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+url: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+docs:
+  - https://dev.sprinklr.com/sprinklr-api-rate-limiting
   - https://dev.sprinklr.com/rest-api-error-and-status-codes
+  - https://dev.sprinklr.com/faqs
+description: >-
+  Sprinklr publishes concrete default numeric rate limits and the full response
+  header contract on a dedicated developer-portal page. This supersedes the
+  earlier API Evangelist record, which said Sprinklr published no numbers —
+  that was true of the api-overview page but not of
+  dev.sprinklr.com/sprinklr-api-rate-limiting, which documents a 1,000 requests
+  per hour and 10 requests per second default per API key, the X-RateLimit-*
+  header family, Retry-After, and a separate endpoint-rule header set.
+limit_count: 3
+rateLimits:
+  - scope: per-api-key
+    window: 1 hour
+    limit: 1000
+    unit: requests
+    enforced_by_default: true
+    description: Maximum number of API requests allowed within one hour. Enforced by default for every API key.
+    source: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+  - scope: per-api-key
+    window: 1 second
+    limit: 10
+    unit: requests
+    enforced_by_default: true
+    description: Controls the number of API requests allowed per second. Enforced by default for every API key.
+    source: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+  - scope: per-endpoint
+    window: configurable
+    limit: null
+    unit: requests
+    enforced_by_default: false
+    description: >-
+      Optional per-endpoint rule, independent of the global limits and not
+      enforced globally by default; must be explicitly configured. Sprinklr's
+      published example is /api/task/{taskId} capped at 10 requests per minute.
+      An integration inside its hourly limit can still be blocked by an
+      endpoint rule.
+    example: {endpoint: '/api/task/{taskId}', limit: 10, window: 1 minute}
+    source: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+headers:
+  time_based:
+    note: Returned on every API response for the global per-second and per-hour limits.
+    fields:
+      - name: X-RateLimit-Limit
+        description: Maximum requests allowed in the current time window.
+        example: '1000'
+      - name: X-RateLimit-Remaining
+        description: Number of requests still available in this window.
+        example: '847'
+      - name: X-RateLimit-Reset
+        description: Unix timestamp (seconds) when the limit fully resets.
+        example: '1709564820'
+  on_exhaustion:
+    fields:
+      - name: Retry-After
+        description: Seconds to wait before retrying. Present on the 429 response.
+        example: '15'
+  endpoint_rule:
+    note: >-
+      Returned when an endpoint-level rule is configured and exceeded. These are
+      lowercase and partly Sprinklr-proprietary.
+    fields:
+      - name: x-ratelimit-limit
+        description: Maximum requests allowed under this endpoint rule.
+        example: '60'
+      - name: x-ratelimit-reset
+        description: Unix timestamp when the endpoint limit resets.
+        example: '1782972240'
+      - name: x-ratelimit-rule-id
+        description: Identifier of the specific endpoint limit that was triggered.
+      - name: retry-after
+        description: Seconds to wait before retrying.
+        example: '32'
+      - name: x-spr-userid
+        description: Internal Sprinklr user identifier.
+      - name: x-spr-partnerid
+        description: Internal Sprinklr partner identifier.
+      - name: x-spr-api_key
+        description: Echo of the calling API key. Value redacted here; see the provider docs.
+exhaustion:
+  status: 429
+  reason_phrase: Too Many Requests
+  error_code: RATE_LIMIT_EXCEEDED
+  body_shape:
+    success: false
+    errors:
+      - code: RATE_LIMIT_EXCEEDED
+        message: Rate limit exceeded. You have made too many requests in the current time window.
+        details: {limit: integer, window: string, resetAt: ISO-8601}
+  also_signalled_as:
+    status: 403
+    title: Developer Over Rate
+    note: >-
+      The error-codes page documents a 403 "Developer Over Rate" for exceeding
+      the per-second or per-hour call limit, and the FAQ repeats it ("If the user
+      exceeds the rate limit, you will receive a 403 'Developer Over Rate' error
+      message"). Clients must therefore treat BOTH 403/Developer Over Rate and
+      429 as rate-limit exhaustion.
+increasing_limits:
+  method: contractual
+  description: Limits can be raised based on business requirements and the contract; request through your success or account manager.
+  contact: tickets@sprinklr.com
+provider_guidance:
+  - {strategy: Batch operations, action: 'Use batch endpoints instead of looping individual requests (e.g. 50 IDs in one POST rather than 50 GETs).'}
+  - {strategy: Intelligent caching, action: 'Cache slow-moving data with TTLs — accounts 30-60 min, profiles 15-30 min, messages 1-5 min, cases 1-2 min, config 1-24 hrs.'}
+  - {strategy: Request queuing, action: 'Queue and pace requests; track timestamps and process sequentially with small delays.'}
+  - {strategy: Exponential backoff, action: 'On 429 use Retry-After or X-RateLimit-Reset, otherwise back off 1s, 2s, 4s.'}
+  - {strategy: Reduce polling, action: 'Replace aggressive polling with webhooks, or use If-Modified-Since smart polling.'}
+  - {strategy: Distribute requests, action: 'Spread work into small batches with delays rather than bursting.'}
+additional_gates:
+  note: >-
+    Three API families are not rate-limited in the ordinary way but are gated —
+    they must be explicitly enabled by Sprinklr support before they will
+    respond at all.
+  gates:
+    - scope: Listening Streams API
+      endpoint: GET /api/v2/listening/query/stream
+      gate: Requires explicit enablement by the Sprinklr support team; volume governed by contracted mention quotas.
+    - scope: Twitter Syndication API
+      gate: Requires explicit enablement by Sprinklr support; also subject to X/Twitter platform limits.
+    - scope: Case Compliance API
+      gate: Requires explicit enablement by the Sprinklr support team.
+    - scope: Reporting exports
+      gate: Twitter/X reporting exports require use-case approval from the social platform.
+monitoring:
+  dashboard: Sprinklr API Usage Reporting Dashboard
+  description: Filter on Response Status Code 429 to see rate-limit errors across API calls.
+notes:
+  - Limits are per API key, and keys are per environment — a key issued for Prod2 will not authenticate against Prod3 (HTTP 421).
+  - The 1,000/hour and 10/second figures are Sprinklr's published defaults; the contracted ceiling may differ per enterprise agreement.
+sources:
+  - https://dev.sprinklr.com/sprinklr-api-rate-limiting
+  - https://dev.sprinklr.com/rest-api-error-and-status-codes
+  - https://dev.sprinklr.com/faqs
+  - https://dev.sprinklr.com/api-overview

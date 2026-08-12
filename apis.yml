@@ -20,7 +20,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/sprinklr.png
 url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/apis.yml
 created: '2026-06-13'
-modified: '2026-06-13'
+modified: '2026-08-12'
 specificationVersion: '0.19'
 tags:
   - Social Media Management
@@ -60,6 +60,14 @@ apis:
         url: https://dev.sprinklr.com/sprinklr-webhooks
       - type: ErrorCodes
         url: https://dev.sprinklr.com/rest-api-error-and-status-codes
+      - type: APIReference
+        url: https://dev.sprinklr.com/api2-0
+      - type: ChangeLog
+        url: https://dev.sprinklr.com/changelog
+      - type: RateLimits
+        url: https://dev.sprinklr.com/sprinklr-api-rate-limiting
+      - type: FAQ
+        url: https://dev.sprinklr.com/faqs
     contact:
       - FN: Sprinklr Developer Support
         url: https://dev.sprinklr.com
@@ -76,18 +84,70 @@ common:
     url: https://dev.sprinklr.com/api-overview
   - type: GettingStarted
     url: https://dev.sprinklr.com/getting-started
-  - type: GitHubOrg
+  - type: GitHubOrganization
     url: https://github.com/sprinklr-inc
   - type: LinkedIn
     url: https://www.linkedin.com/company/sprinklr
   - type: Blog
     url: https://www.sprinklr.com/blog/
-  - type: Pricing
-    url: https://www.sprinklr.com/pricing/
   - type: StatusPage
     url: https://status.sprinklr.com/
   - type: X
     url: https://x.com/sprinklr
+  - type: DeveloperPortal
+    url: https://dev.sprinklr.com/
+  - type: APIReference
+    url: https://dev.sprinklr.com/api2-0
+  - type: SignUp
+    url: https://dev.sprinklr.com/login
+  - type: Support
+    url: https://www.sprinklr.com/help/
+  - type: Community
+    url: https://community.sprinklr.com/
+  - type: TermsOfService
+    url: https://www.sprinklr.com/terms/
+  - type: PrivacyPolicy
+    url: https://www.sprinklr.com/privacy/
+  - type: Postman
+    url: https://www.postman.com/sprinklr-api/sprinklr-public-api-collections/overview
+  - type: Security
+    url: https://www.sprinklr.com/responsible-disclosure/
+  - type: Compliance
+    url: https://trust.sprinklr.com/
+  - type: WellKnown
+    url: well-known/sprinklr-well-known.yml
+  - type: SecurityTxt
+    url: well-known/sprinklr-security.txt
+  - type: LLMsTxt
+    url: llms/sprinklr-llms.txt
+  - type: Packages
+    url: packages/sprinklr-packages.yml
+  - type: SDKs
+    url: packages/sprinklr-packages.yml
+  - type: CLI
+    url: cli/sprinklr-cli.yml
+  - type: MCPServer
+    url: mcp/sprinklr-mcp.yml
+  - type: ChangeLog
+    url: changelog/sprinklr-changelog.yml
+  - type: ErrorCatalog
+    url: errors/sprinklr-problem-types.yml
+  - type: Conventions
+    url: conventions/sprinklr-conventions.yml
+  - type: Authentication
+    url: authentication/sprinklr-authentication.yml
+  - type: Lifecycle
+    url: lifecycle/sprinklr-lifecycle.yml
+  - type: Conformance
+    url: conformance/sprinklr-conformance.yml
+  - type: Webhooks
+    url: asyncapi/sprinklr-webhooks.yml
+  - type: Sandbox
+    url: sandbox/sprinklr-sandbox.yml
+  - type: Components
+    url: components/sprinklr-components.yml
+  - type: DataModel
+    url: data-model/sprinklr-data-model.yml
   - type: Plans
     url: https://raw.githubusercontent.com/api-evangelist/sprinklr/refs/heads/main/plans/sprinklr-plans-pricing.yml
   - type: RateLimits
@@ -97,3 +157,27 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Sprinklr's developer portal is an Angular SPA, but its Apigee liveportal
+    JSON API served all 18 documentation pages anonymously, which yielded real
+    published rate limits, an error catalogue, the OAuth model, the webhook
+    catalogue and a quarterly changelog. No OpenAPI exists — the portal's 20
+    Apigee API products all return 404 on their spec snapshot.
+  evidence:
+    - url: https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/apis
+      status: 200
+    - url: https://dev.sprinklr.com/portals/api/sites/spr-apigee-prod-apiprodportal/liveportal/apis/684132/spec
+      status: 404
+    - url: https://api3.sprinklr.com/openapi.json
+      status: 404
+    - url: https://www.sprinklr.com/llms.txt
+      status: 200
+  checked: '2026-08-12'

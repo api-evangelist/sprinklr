@@ -1,0 +1,83 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/changelog
+description: >-
+  Sprinklr publishes a dated API changelog on the developer portal, grouped by
+  calendar quarter back to Q2 2020. Sprinklr describes four change classes it
+  records: API endpoint enhancement, new API endpoints, API deprecation, and
+  change in terms of service.
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  docs: https://dev.sprinklr.com/api2-0
+cadence: quarterly
+oldest_entry: '2020-04'
+latest_entry: '2026-01'
+staleness_note: >-
+  As of the 2026-08-12 read the newest published quarter is "Jan – Mar, 2026".
+  Q2 2026 (Apr – Jun) has not been posted, so the changelog is at least one full
+  quarter behind — even though Sprinklr shipped a Summer '26 (26.7) platform
+  release on 2026-07-15.
+quarters:
+  - {period: 'Jan – Mar, 2026', url: 'https://dev.sprinklr.com/jan-mar-2026'}
+  - {period: 'Oct – Dec, 2025', url: 'https://dev.sprinklr.com/oct-dec-2025'}
+  - {period: 'Jul – Sep, 2025', url: 'https://dev.sprinklr.com/jul-sep-2025'}
+  - {period: 'Apr – Jun, 2025', url: 'https://dev.sprinklr.com/apr-jun-2025'}
+  - {period: 'Jan – Mar, 2025', url: 'https://dev.sprinklr.com/jan-mar-2025'}
+  - {period: 'Oct – Dec, 2024', url: 'https://dev.sprinklr.com/oct-dec-2024'}
+  - {period: 'Jul – Sep, 2024', url: 'https://dev.sprinklr.com/jul-sep-2024'}
+  - {period: 'Apr – Jun, 2024', url: 'https://dev.sprinklr.com/apr-jun-2024'}
+  - {period: 'Jan – Mar, 2024', url: 'https://dev.sprinklr.com/jan-mar-2024'}
+  - {period: 'Oct – Dec, 2023', url: 'https://dev.sprinklr.com/oct-dec-2023'}
+  - {period: 'Jul – Sep, 2023', url: 'https://dev.sprinklr.com/jul-sep-2023'}
+  - {period: 'Apr – Jun, 2023', url: 'https://dev.sprinklr.com/apr-jun-2023'}
+  - {period: 'Jan – Mar, 2023', url: 'https://dev.sprinklr.com/jan-mar-2023'}
+  - {period: 'Oct - Dec, 2022', url: 'https://dev.sprinklr.com/oct-dec-2022'}
+  - {period: 'Jul - Sep, 2022', url: 'https://dev.sprinklr.com/jul-sep-2022'}
+  - {period: 'Apr - Jun, 2022', url: 'https://dev.sprinklr.com/apr-jun-2022'}
+  - {period: 'Jan - Mar, 2022', url: 'https://dev.sprinklr.com/jan-mar-2022'}
+  - {period: 'Oct - Dec, 2021', url: 'https://dev.sprinklr.com/oct-dec-2021'}
+  - {period: 'Jul - Sep, 2021', url: 'https://dev.sprinklr.com/jul-sep-2021'}
+  - {period: 'Apr - Jun 2021', url: 'https://dev.sprinklr.com/apr-jun-2021'}
+  - {period: 'Jan - Mar, 2021', url: 'https://dev.sprinklr.com/jan-mar-2021'}
+  - {period: 'Oct - Dec, 2020', url: 'https://dev.sprinklr.com/oct-dec-2020'}
+  - {period: 'Jul - Sep, 2020', url: 'https://dev.sprinklr.com/jul-sep-2020'}
+  - {period: 'Apr - Jun, 2020', url: 'https://dev.sprinklr.com/apr-jun-2020'}
+entries:
+  - period: 'Jan – Mar, 2026'
+    url: https://dev.sprinklr.com/jan-mar-2026
+    breaking: []
+    additions:
+      - 'Create Custom Entity - Bulk API: bulk-insert multiple records for a custom entity in one request.'
+      - 'Bulk Update User Profiles API: identify and update multiple user profiles in one request by channel details or profile IDs.'
+    changes:
+      - 'Search by Entity API now supports PROFILE searches by phone number and email ID.'
+      - 'Partial Update User API now supports dot notation for nested attributes (e.g. name.familyName).'
+      - 'Agent Status Update API now accepts External User Identifiers (externalId) to identify agents.'
+      - 'WhatsApp Dynamic Templates API now supports GEO_LOCATION as an attachment type (latitude, longitude, name, address).'
+  - period: 'Oct – Dec, 2025'
+    url: https://dev.sprinklr.com/oct-dec-2025
+    breaking: []
+    additions:
+      - 'Partial Update User (SCIM) API: PATCH a subset of user attributes without replacing the record; follows the SCIM 2.0 PATCH standard with add and replace operations over name, active, locale, emails, client attributes and custom properties.'
+      - 'CFM Transaction APIs: manage transactions capturing customer interaction data for triggering personalized surveys.'
+      - 'Generate Personalized Survey Links API.'
+      - 'Preview Outbound Post API: generate and download previews of outbound posts before publishing.'
+  - period: 'Jul – Sep, 2025'
+    url: https://dev.sprinklr.com/jul-sep-2025
+    breaking: []
+    additions:
+      - 'Advertising APIs (Ads Publishing): channel-agnostic create/manage/publish across Facebook, Instagram, LinkedIn and X — 23 endpoints including Fetch Ad User Accounts, Fetch Campaigns, Fetch Ad Sets, Fetch Ad Variants, Fetch Audience Metadata, Fetch Ad Pixels, Create/Update Ad Campaigns and Ad Sets.'
+      - 'Voice Application APIs: Create Voice Application, Update Voice Application.'
+      - 'Business Hours and Holiday Lists APIs: create, retrieve, update and delete business-hours configurations and holiday lists.'
+      - 'CFM Survey Response Webhook.'
+      - 'Voice Call Quality Metrics Webhook: participant details, call identifiers and real-time MOS, jitter, packet loss, round-trip time and network speed.'
+      - 'Business Hours and Business Holiday Lists Webhooks.'
+      - 'CFM Transaction APIs.'
+      - 'Preview Outbound Post API.'
+change_classes_declared_by_provider:
+  - API endpoint enhancement
+  - New API endpoints
+  - API deprecation
+  - Change in terms of service

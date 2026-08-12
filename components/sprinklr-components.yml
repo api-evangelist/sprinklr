@@ -1,0 +1,77 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/sdks
+docs:
+  - https://dev.sprinklr.com/sdks
+  - https://dev.sprinklr.com/live-chat-application-apis
+  - https://dev.sprinklr.com/headless-live-chat-sdk
+description: >-
+  Sprinklr's client-side surface is embed-and-extend, not server-side SDK. Two
+  distinct families exist: customer-facing embeds (Live Chat, Headless Live
+  Chat, CFM survey SDKs) that put Sprinklr experiences inside a brand's own web
+  and mobile apps, and agent-facing extension components (the @sprinklrjs npm
+  packages) that put a partner's application inside the Sprinklr agent console.
+families:
+  - name: Live Chat SDK
+    kind: embedded-widget
+    surfaces: [web, ios, android]
+    docs: https://dev.sprinklr.com/sdks
+    description: >-
+      Collection of methods for Live Chat extensibility. Gives control over how
+      the chat window opens and closes, what information is shown on open, and
+      how support behaves on a website or mobile app. Ships the default Sprinklr
+      chat UI.
+    registry_coordinate: null
+    registry_note: No public npm/CocoaPods/Maven coordinate is published; distributed to licensed customers.
+  - name: Headless Live Chat SDK
+    kind: headless-engine
+    surfaces: [web, ios, android]
+    docs: https://dev.sprinklr.com/headless-live-chat-sdk
+    description: >-
+      Integrates Sprinklr's chat engine with no default UI components, for
+      developers who want full control over chat rendering and interaction flow.
+      This is now the recommended path — the older Live Chat Application APIs
+      are no longer supported and point here as their replacement.
+    replaces: Live Chat Application APIs
+    registry_coordinate: null
+  - name: CFM SDKs
+    kind: embedded-survey
+    surfaces: [web, ios, android]
+    docs: https://dev.sprinklr.com/sdks
+    description: >-
+      Customer Feedback Management SDKs for embedding surveys into mobile apps
+      and websites — capture feedback at the right moment, enrich responses with
+      contextual data, and link them to authenticated audience profiles for
+      reporting.
+    related_apis: [CFM Transaction APIs, Generate Personalized Survey Links API]
+    registry_coordinate: null
+  - name: Sprinklr Apps (agent-console extensions)
+    kind: host-embedded-application
+    surfaces: [web]
+    description: >-
+      A partner application built with create-sprinklr-app and installed as an
+      external app inside the Sprinklr platform, rendered in the agent
+      interface. @sprinklrjs/integration-sdk carries messages between the
+      Sprinklr agent interface and the embedded app;
+      @sprinklrjs/business-components-react supplies React components an
+      external app can embed.
+    loaders:
+      - {package: '@sprinklrjs/create-sprinklr-app', version: 2.1.2, published: '2024-10-18'}
+      - {package: '@sprinklrjs/integration-sdk', version: 0.0.3, published: '2025-11-26'}
+      - {package: '@sprinklrjs/app-sdk', version: 1.0.0, published: '2024-07-30'}
+      - {package: '@sprinklrjs/business-components-react', version: 0.0.18-beta.2, published: '2022-08-02'}
+    package_ref: packages/sprinklr-packages.yml
+  - name: Community forum
+    kind: hosted-surface
+    docs: https://dev.sprinklr.com/community-apis
+    description: >-
+      Sprinklr Communities is a hosted, brandable community surface with a
+      limited API for posts, comments, replies, users, categories, awards and
+      ranks. Sprinklr explicitly scopes it: "The Community APIs are designed to
+      support limited and specific use cases only. They are not intended for
+      building or replicating a full-scale community platform."
+    auth_note: Separate authorization path requiring projectId and preSharedKey.
+gaps:
+  - No public distribution coordinate (npm, CocoaPods, Maven, CDN URL) for the Live Chat, Headless Live Chat or CFM SDKs — versions and release dates cannot be verified from outside.
+  - No versioned changelog for any client-side SDK.
+  - Three of the four published @sprinklrjs packages last shipped in 2024 or earlier.

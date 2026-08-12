@@ -1,0 +1,137 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/api2-0
+docs:
+  - https://dev.sprinklr.com/api2-0
+  - https://dev.sprinklr.com/api1-0
+  - https://dev.sprinklr.com/sprinklr-webhooks
+note: >-
+  This is NOT derived from an OpenAPI — Sprinklr publishes none. Entities are
+  taken from the v2 API family index and from the webhook payload examples the
+  developer portal publishes verbatim. Relationships are recorded only where a
+  published payload actually carries the referencing field, or where Sprinklr's
+  own prose states the link. Cardinality is marked `asserted: docs` where it
+  comes from prose and `asserted: payload` where it comes from a published
+  example body. Nothing is inferred from naming alone.
+core_model_statement: >-
+  "Sprinklr API v2.0 ... is built on standard business objects like Message,
+  Case, Profile, Task, etc., similar to webhooks."
+  — https://dev.sprinklr.com/api2-0
+id_format:
+  style: opaque
+  observed: 24-character lowercase hex (MongoDB ObjectId shape) for most entities; numeric for User and Case number.
+  examples_note: >-
+    Case id "5dfa53ce7edc203f0f725fde" and subscriptionId
+    "5dd7d1a473f52c00019820a7" are 24-hex; assigneeId "600000788" and
+    customerId 66000000 are numeric; contact ids are channel-prefixed, e.g.
+    "FACEBOOK_1858570567593719".
+  channel_prefixed_ids: true
+entities:
+  - name: Case
+    description: A unit of customer service work; the central Service object.
+    api_family: Case
+    fields_observed: [id, caseNumber, subject, description, version, status, priority, caseType, workflow, contact, dueDate, createdTime, modifiedTime, firstMessageId, sentiment]
+    enums_observed:
+      status: [New]
+      priority: [Medium]
+      caseType: [Complaint]
+      sentiment: {1: positive, 0: neutral, -1: negative}
+    webhook_events: [case.create, case.update, case.delete, case.association-change]
+  - name: Message
+    description: An inbound or outbound message on any of the 30+ supported channels.
+    api_family: Message
+    variants: [inbound, outbound, draft]
+    webhook_events: [inbound.received, inbound.updated, inbound.deleted, outbound.published, outbound.publish-failed, draft.created, draft.scheduled, draft.updated]
+  - name: Profile
+    description: A customer/audience profile, resolvable per channel.
+    api_family: Profile
+    webhook_events: [profile.created, profile.updated, profile.deleted, profile.merged]
+  - name: User
+    description: A Sprinklr platform user (agent, admin). Managed over the SCIM API.
+    api_family: SCIM (User) API
+    fields_observed: [id, name, customerId, type, email, properties]
+    enums_observed:
+      type: [PARTNER_ADMIN, PARTNER_USER, CLIENT_ADMIN, CLIENT_USER]
+  - name: Task
+    api_family: Task
+    webhook_events: [task.create, task.update, task.delete]
+  - name: Campaign
+    api_family: Campaign
+    webhook_events: [campaign.create, campaign.update, campaign.delete]
+  - name: Comment
+    aka: Note
+    api_family: Comment (Note)
+    webhook_events: [comment.create, comment.update]
+  - name: Asset
+    aka: SAM asset
+    api_family: Sprinklr Asset Manager
+    webhook_events: [asset.created, asset.updated, asset.deleted]
+  - name: Account
+    description: A connected social/digital channel account.
+    api_family: Account
+  - name: CustomField
+    description: Customer-defined field whose generated {Id} becomes the key inside customProperties on other entities.
+    api_family: Custom Field
+  - name: CustomEntity
+    api_family: Custom Entity
+  - name: Audience
+    api_family: Audience
+  - name: Queue
+    description: Work queue that cases are routed into; access is permission-gated.
+  - name: Workspace
+    description: Partner/client environment boundary; a token is scoped to the workspaces chosen at consent time.
+    api_family: Fetch Accessible Workspaces
+  - name: Skill
+    api_family: Skill
+  - name: WebhookSubscription
+    api_family: Webhooks
+    fields_observed: [subscriptionId]
+  - name: Conversation
+    description: A live-chat conversation containing messages.
+    api_family: Live Stream Chat / Live Chat
+  - name: Survey
+    aka: CFM survey
+    api_family: Customer Feedback Management (CFM)
+  - name: Transaction
+    description: CFM transaction capturing customer interaction data used to trigger personalized surveys.
+    api_family: Customer Feedback Management (CFM)
+    added: '2025-Q4'
+  - name: AdCampaign
+    api_family: Advertising APIs
+    children: [AdSet, AdVariant]
+    added: '2025-Q3'
+  - name: BusinessHours
+    api_family: Business Hours and Holiday Lists
+    added: '2025-Q3'
+  - name: KnowledgeBaseArticle
+    api_family: Knowledge Base
+  - name: CommunityPost
+    api_family: Community APIs
+    children: [CommunityComment, CommunityReply]
+relationships:
+  - {from: Case, to: Message, type: has_many, via: firstMessageId, asserted: payload, note: 'Case carries firstMessageId; case.association-change fires when a new message is associated with a case.'}
+  - {from: Case, to: Profile, type: belongs_to, via: contact, asserted: payload, note: 'contact = {id, name} with a channel-prefixed id such as FACEBOOK_1858570567593719.'}
+  - {from: Case, to: User, type: belongs_to, via: workflow.assignment.assigneeId, asserted: payload}
+  - {from: Case, to: User, type: belongs_to, via: workflow.assignment.assignedById, asserted: payload}
+  - {from: Case, to: Queue, type: has_many, via: workflow.queues, asserted: payload}
+  - {from: Case, to: CustomField, type: has_many, via: workflow.customProperties, asserted: payload, note: 'Keys are custom-field ids (24-hex) plus namespaced keys like spr_uc_type.'}
+  - {from: Message, to: Account, type: belongs_to, via: message id prefix, asserted: payload, note: 'firstMessageId encodes ACCOUNT_<id>_<epoch>_<CHANNEL>_...'}
+  - {from: Message, to: Conversation, type: belongs_to, via: conversationId, asserted: docs, note: 'Live-chat Fetch Messages takes a conversation id.'}
+  - {from: Profile, to: Message, type: has_many, via: sender lookup, asserted: docs, note: 'User LookUp API resolves profile information for the sender of a message.'}
+  - {from: User, to: CustomField, type: has_many, via: properties, asserted: payload, note: 'Keys observed as _c_<24-hex>.'}
+  - {from: AdCampaign, to: AdSet, type: has_many, via: campaign id, asserted: docs}
+  - {from: AdSet, to: AdVariant, type: has_many, via: ad set id, asserted: docs}
+  - {from: Transaction, to: Survey, type: has_many, via: transaction id, asserted: docs, note: 'Personalized survey links are generated per user and associated transaction.'}
+  - {from: CommunityPost, to: CommunityComment, type: has_many, via: post id, asserted: docs}
+  - {from: CommunityComment, to: CommunityReply, type: has_many, via: comment id, asserted: docs}
+  - {from: WebhookSubscription, to: Case, type: watches, via: type=case.*, asserted: payload}
+api_families_v2:
+  count: 57
+  list: [Account, Advocacy Community, Advertising APIs, Asset Group, Audit, Audience, Bulk Import Entity, Business Hours and Holiday Lists, Campaign, Campaign Brief, Case, Comment (Note), Content Template, Create Email, CRM User Mapping, Custom Entity, Custom Field, Customer Feedback Management (CFM), Dashboard, Data Ingestion, Deflection, Engagement Dashboard, External Authentication Credential APIs, Fetch Accessible Workspaces, Intuition, Journey Facilitator, Knowledge Base, Lead, Listening, Listening Streams, Live Stream Chat, Lookup, Macro API, Me API, Media Download, Media Upload, Message, Participant APIs, Product Catalog, Profile, Publishing, Publishing Template, Reporting, Reporting Suite, SCIM (User) API, Search, Skill, Source Agnostic Message, Sprinklr Asset Manager, Sprinklr Bot, Sprinklr Voice, Standard Entity, Support Ticket, Suppression List, Task, Thread Control, URL Shortener, User APIs, Webhook Replay and Retrieve]
+api_families_v1:
+  count: 26
+  list: [Audit, Bootstrap Resources, Campaign, Case, Comment (Note), Custom Field, Content Brief, Dashboard, Engagement Dashboard, Extension, Listening, Listening Widget, Macro, Message, Paid Initiative, Product APIs, Profile, Publishing, Reporting, Sprinklr Asset Manager, Asset Definitions, User (SCIM), UGC API, URL Shortener, GDPR (Privacy), Execute Guided Workflow]
+gaps:
+  - No schema documents of any kind — no OpenAPI components, no JSON Schema, no object reference with field types.
+  - Field lists above are the ones Sprinklr publishes in example payloads; they are not complete entity schemas.
+  - Custom-field keys are opaque ids that must be resolved at runtime through the Custom Field API before any payload can be interpreted.

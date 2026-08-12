@@ -1,0 +1,131 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/rest-api-error-and-status-codes
+docs: https://dev.sprinklr.com/rest-api-error-and-status-codes
+format: custom-json
+format_note: >-
+  Sprinklr does NOT use RFC 9457 problem+json. Errors come back as a JSON
+  envelope with a boolean success flag and an errors[] array; the rate-limit
+  documentation shows the shape below. There is no `type` URI, no `instance`,
+  and no application/problem+json media type anywhere in the published docs.
+envelope:
+  media_type: application/json
+  shape:
+    success: boolean
+    errors:
+      - code: string
+        message: string
+        details: object
+  example_fields: [code, message, details.limit, details.window, details.resetAt]
+  observed_gateway_envelope:
+    note: >-
+      The Apigee edge in front of api3.sprinklr.com returns a different envelope
+      for unauthenticated calls, observed live on 2026-08-12 against
+      https://api3.sprinklr.com/api/v2/openapi.json (HTTP 401).
+    shape:
+      data: array
+      errors:
+        - id: string
+          code: integer
+          message: string
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Bad syntax; probable issue with the request payload.
+    causes:
+      - Missing or wrong key
+      - Missing access token
+      - Wrong method type (GET, POST, PUT, DELETE)
+      - Invalid action (e.g. DELETE on an already-deleted resource)
+      - Invalid request/response
+    remediation: Recheck the documentation and update the request; contact the integration support team if it persists.
+  - status: 400
+    title: Access to resource is forbidden
+    meaning: UI permission problem for the assigned workspace.
+    remediation: Ask your admin or success manager to assign the required roles and permissions.
+    note: Sprinklr documents this permission failure on 400 rather than 403.
+  - status: 401
+    title: Unauthorized
+    meaning: Bearer token invalid, expired, or lacking the necessary permissions.
+    remediation: Refresh the authorization token. Access tokens are valid for 30 days.
+  - status: 401
+    title: Unauthorized (invalid consumer key)
+    meaning: The API key is not associated with the environment being called.
+    remediation: Check that the key belongs to the right environment (MY ACCOUNT on the developer portal).
+  - status: 403
+    title: Developer Inactive
+    meaning: Probable issue with request headers.
+    remediation: Recheck the `key`, `Authorization` and `Content-Type` headers, then confirm you have access to the endpoint.
+  - status: 403
+    title: Forbidden
+    meaning: Request is well formed but the user is not permitted to access the resource.
+    remediation: Cross-check the endpoint URI, clear cookies, request the required permissions.
+  - status: 403
+    title: Developer Over Rate
+    meaning: API calls per second or per hour exceeded the configured limit.
+    remediation: Retry after the window resets.
+    rate_limit_related: true
+    note: >-
+      Sprinklr signals rate-limit exhaustion on BOTH 403 (Developer Over Rate,
+      the Apigee quota policy) and 429 (Too Many Requests). Clients must handle
+      both. See rate-limits/sprinklr-rate-limits.yml.
+  - status: 404
+    title: Resource Not Found
+    meaning: The requested resource could not be found.
+    remediation: Cross-check the endpoint URL, headers, method type and request body.
+  - status: 405
+    title: Method Not Allowed
+    meaning: Incorrect HTTP method for the endpoint.
+    remediation: Check the documentation for the correct method type.
+  - status: 409
+    title: Conflict
+    meaning: Conflict with the current version/status of the target resource — e.g. updating a record older than the one on the server.
+    remediation: Recheck the requested URL, clear cookies, contact the integration support team.
+    note: >-
+      This is Sprinklr's optimistic-concurrency signal (the Case payload carries
+      a `version` field). It is NOT an idempotency-key replay conflict; Sprinklr
+      documents no idempotency key.
+  - status: 411
+    title: Length Required
+    meaning: A POST/PUT request was made without a Content-Length header.
+    remediation: Add Content-Length; send 0 when there is no request body.
+  - status: 415
+    title: Unsupported Media Type
+    meaning: Incorrect or unsupported payload format.
+    remediation: Check the Content-Type and Accept headers.
+  - status: 421
+    title: Misdirected Request
+    meaning: The API key and the environment do not match (a key issued for Prod2 will not work against Prod3).
+    remediation: Check which environment the key is mapped against.
+    note: Sprinklr-specific use of 421; a direct consequence of the per-environment key model.
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit exceeded.
+    remediation: Wait for the window to reset; honour Retry-After and X-RateLimit-Reset.
+    error_code: RATE_LIMIT_EXCEEDED
+    rate_limit_related: true
+  - status: 500
+    title: Internal Server Error
+    meaning: Server-side issue; generally transient.
+    remediation: Retry; contact the integration support team if it persists.
+  - status: 503
+    title: Service Unavailable
+    meaning: Server not ready to process the request; scheduled maintenance is one cause.
+    remediation: Retry later.
+  - status: 504
+    title: Gateway Timeout
+    meaning: The gateway could not fetch a timely response from the upstream.
+    remediation: Retry later.
+success_codes:
+  - {status: 200, title: OK, meaning: Call succeeded and performed the intended action.}
+  - {status: 201, title: Created, meaning: Call succeeded and the resource was created.}
+  - {status: 202, title: Accepted, meaning: Request accepted; processing will take some time.}
+  - {status: 204, title: No Content, meaning: Call succeeded with no associated response body.}
+coverage:
+  problem_count: 18
+  success_count: 4
+  rfc9457: false
+gaps:
+  - No machine-readable error registry (no OpenAPI, no error-code JSON/CSV).
+  - No stable string error codes published except RATE_LIMIT_EXCEEDED; problems are identified by HTTP status plus a prose title.
+  - Two different error envelopes are in play (Apigee gateway vs Sprinklr application) and the docs describe neither as canonical.

@@ -1,0 +1,109 @@
+generated: '2026-08-12'
+method: searched
+source: https://dev.sprinklr.com/sprinklr-webhooks
+docs:
+  - https://dev.sprinklr.com/sprinklr-webhooks
+  - https://dev.sprinklr.com/webhook-retries-logic
+spec_type: none
+asyncapi_published: false
+asyncapi_note: >-
+  Sprinklr publishes NO AsyncAPI document. Probed /asyncapi.yaml and
+  /asyncapi.json on api3.sprinklr.com and dev.sprinklr.com; the GitHub org
+  github.com/sprinklr-inc holds no event spec. What Sprinklr does publish is a
+  prose webhook catalogue on the developer portal, captured below. Nothing here
+  is fabricated into AsyncAPI shape.
+surface: webhooks
+transport: HTTP POST to a subscriber-registered callback URL
+payload_format: application/json
+description: >-
+  Sprinklr webhooks push real-time entity events to a callback URL registered
+  through the webhook subscription APIs. Subscriptions are managed through a
+  full CRUD + lifecycle surface and are authenticated with the same OAuth 2.0
+  model as the rest of the platform.
+subscription_operations:
+  - {name: Create Subscription, description: Register a callback URL and event type.}
+  - {name: Verify Subscription, description: Callback URL verification check.}
+  - {name: Activate Subscription}
+  - {name: Read Subscription}
+  - {name: Read All Subscription}
+  - {name: Update Subscription}
+  - {name: Deactivate Subscription}
+  - {name: Delete Subscription}
+  - {name: Fetch Webhook Types, description: Enumerates the webhook types supported by the platform.}
+  - {name: Webhook Replay and Retrieve, description: Listed as a v2 API family; replays or retrieves previously delivered events.}
+events:
+  - entity: Case
+    types: [case.create, case.update, case.delete, case.association-change]
+    note: Case payloads carry a sentiment key — 1 positive, 0 neutral, -1 negative.
+  - entity: Message
+    subtypes:
+      inbound: [updated, received, deleted]
+      outbound: [published, publish-failed]
+      draft: [created, scheduled, updated]
+  - entity: Audience Activity
+    types: [activity]
+  - entity: Profile
+    types: [created, updated, deleted, merged]
+  - entity: Campaign
+    types: [create, update, delete]
+  - entity: Comment
+    types: [create, update]
+  - entity: SAM (Sprinklr Asset Manager)
+    types: [asset.created, asset.updated, asset.deleted]
+  - entity: Task
+    types: [create, update, delete]
+  - entity: CFM Survey Response
+    types: [survey.response.submitted]
+    added: '2025-Q3'
+    source: https://dev.sprinklr.com/jul-sep-2025
+  - entity: Voice Call Quality Metrics
+    types: [call.quality]
+    added: '2025-Q3'
+    payload_note: Participant details, call identifiers and real-time MOS, jitter, packet loss, round-trip time and network speed.
+    source: https://dev.sprinklr.com/jul-sep-2025
+  - entity: Business Hours
+    types: [created, updated]
+    added: '2025-Q3'
+  - entity: Business Holiday Lists
+    types: [created, updated]
+    added: '2025-Q3'
+event_count: 12
+message_envelope:
+  fields:
+    id: Event identifier.
+    type: 'Dotted event name, e.g. case.create / case.update.'
+    payload: The entity snapshot.
+    eventTime: Epoch milliseconds.
+    subscriptionDetails.subscriptionId: The subscription that produced the delivery.
+  example_source: https://dev.sprinklr.com/sprinklr-webhooks
+delivery:
+  expected_response: 200 OK
+  timeout_seconds: 10
+  provider_guidance: >-
+    "We recommend using an asynchronous webhook endpoint that sends 200 OK
+    within 10 seconds (default setup for webhook retries logic). This helps
+    avoid unwanted congestion at either the sender's or receiver's end."
+  retries:
+    supported: true
+    docs: https://dev.sprinklr.com/webhook-retries-logic
+    policy_detail: null
+  replay:
+    supported: true
+    via: Webhook Replay and Retrieve API
+security:
+  callback_verification: true
+  callback_verification_note: Sprinklr performs a Callback URL Verification Check before activating a subscription.
+  signing:
+    documented: false
+    note: >-
+      No HMAC signature header, no shared-secret signing scheme and no
+      timestamp-tolerance rule is documented on the webhooks page. Sprinklr says
+      "you can even use the different sets of available Authorization to protect
+      your data" but does not specify them publicly. A consumer therefore has no
+      published way to verify that an inbound POST really came from Sprinklr.
+  authorization_options: available-but-unspecified
+gaps:
+  - No AsyncAPI or other machine-readable event schema.
+  - No published payload signing/verification contract.
+  - No published retry backoff schedule or maximum attempt count.
+  - Event type strings are only partially documented (case.create / case.update are shown; the rest are named in prose).
