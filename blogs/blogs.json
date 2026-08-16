@@ -6,17 +6,19 @@
       "feed_url": "https://www.sprinklr.com/blog/feed/",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     },
     {
       "source": "https://www.linkedin.com/company/sprinklr",
       "feed_url": "https://www.linkedin.com/company/sprinklr",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
-  "fetched": "2026-08-06T14:08:46Z",
+  "fetched": "2026-08-15T12:11:08Z",
   "post_count": 14,
   "agent_pulled": "2026-06-27"
 }
