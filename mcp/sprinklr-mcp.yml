@@ -9,53 +9,56 @@ server:
   transport: null
   url: null
   publicly_documented: false
-description: >-
-  Sprinklr announced Sprinklr MCP (Beta) in its own newsroom on 2026-07-15 as
-  part of the Summer '26 (26.7) release. The provider's exact wording: "With
-  Sprinklr MCP (Beta), organizations can access Sprinklr insights directly
-  within AI assistants such as Microsoft Copilot, ChatGPT, and Claude — making
-  customer intelligence available wherever work happens." This is a first-party
-  Sprinklr-hosted MCP surface, distinct from the separate, already-shipped
-  Model Context Protocol Tool feature that lets Sprinklr CONSUME external MCP
-  servers as tools inside its Conversational AI applications.
+description: 'Sprinklr announced Sprinklr MCP (Beta) in its own newsroom on 2026-07-15 as part of the
+  Summer ''26 (26.7) release. The provider''s exact wording: "With Sprinklr MCP (Beta), organizations
+  can access Sprinklr insights directly within AI assistants such as Microsoft Copilot, ChatGPT, and Claude
+  — making customer intelligence available wherever work happens." This is a first-party Sprinklr-hosted
+  MCP surface, distinct from the separate, already-shipped Model Context Protocol Tool feature that lets
+  Sprinklr CONSUME external MCP servers as tools inside its Conversational AI applications.'
 verified:
   provider_announcement: true
   public_endpoint: false
   public_tool_list: false
   live_tools_list_probe: false
 tools: []
-tools_note: >-
-  NO TOOL LIST IS ASSERTED. Sprinklr publishes no MCP endpoint URL, no
-  tools/list manifest, no transport declaration and no auth/scope documentation
-  for Sprinklr MCP. There is nothing on dev.sprinklr.com about it — the
-  developer portal's menu tree (35 pages) has no MCP page. Deriving a candidate
-  tool set from an OpenAPI is not possible either, because Sprinklr publishes no
-  OpenAPI. Any tool list here would be invented, so none is recorded.
+tools_note: NO TOOL LIST IS ASSERTED. Sprinklr publishes no MCP endpoint URL, no tools/list manifest,
+  no transport declaration and no auth/scope documentation for Sprinklr MCP. There is nothing on dev.sprinklr.com
+  about it — the developer portal's menu tree (35 pages) has no MCP page. Deriving a candidate tool set
+  from an OpenAPI is not possible either, because Sprinklr publishes no OpenAPI. Any tool list here would
+  be invented, so none is recorded.
 probes:
-  - {url: 'https://mcp.sprinklr.com', status: 0, result: DNS does not resolve}
-  - {url: 'https://api3.sprinklr.com/mcp', status: 404}
-  - {url: 'https://www.sprinklr.com/mcp', status: 404}
-  - {url: 'https://dev.sprinklr.com/mcp', status: 200, result: 'SPA catch-all HTML shell, not an MCP endpoint'}
-  - {url: 'https://api3.sprinklr.com/mcp (POST tools/list)', status: 404}
+- url: https://mcp.sprinklr.com
+  status: 0
+  result: DNS does not resolve
+- url: https://api3.sprinklr.com/mcp
+  status: 404
+- url: https://www.sprinklr.com/mcp
+  status: 404
+- url: https://dev.sprinklr.com/mcp
+  status: 200
+  result: SPA catch-all HTML shell, not an MCP endpoint
+- url: https://api3.sprinklr.com/mcp (POST tools/list)
+  status: 404
 distinct_feature:
   name: Model Context Protocol Tool
   direction: sprinklr-as-mcp-client
   docs: https://www.sprinklr.com/help/articles/integration-tools/model-context-protocol-tool/6889c27b6c75fc514a03195b
-  description: >-
-    Configuration surface inside the Sprinklr platform (All Settings > APIs &
-    Integrations > Model Context Protocol) where an admin registers an EXTERNAL
-    MCP server by name, authentication credential and endpoint URL, so its tools
-    can be called by Sprinklr Conversational AI applications. This is Sprinklr
-    acting as an MCP client, and is not the Sprinklr MCP server above.
+  description: Configuration surface inside the Sprinklr platform (All Settings > APIs & Integrations
+    > Model Context Protocol) where an admin registers an EXTERNAL MCP server by name, authentication
+    credential and endpoint URL, so its tools can be called by Sprinklr Conversational AI applications.
+    This is Sprinklr acting as an MCP client, and is not the Sprinklr MCP server above.
 third_party:
-  - name: sprinklr-mcp
-    url: https://github.com/daiict218/sprinklr-mcp
-    npm: sprinklr-mcp@0.1.0
-    published: '2026-04-06'
-    official: false
-    note: Community wrapper over the Sprinklr REST API. Not endorsed or published by Sprinklr.
-next_step: >-
-  Re-probe once Sprinklr documents the endpoint. When a URL appears, POST
-  {"jsonrpc":"2.0","id":1,"method":"tools/list"} with
-  Accept: application/json, text/event-stream to capture the real inputSchemas,
-  and only then emit mcp/sprinklr-tool-crosswalk.yml.
+- name: sprinklr-mcp
+  url: https://github.com/daiict218/sprinklr-mcp
+  npm: sprinklr-mcp@0.1.0
+  published: '2026-04-06'
+  official: false
+  note: Community wrapper over the Sprinklr REST API. Not endorsed or published by Sprinklr.
+next_step: 'Re-probe once Sprinklr documents the endpoint. When a URL appears, POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}
+  with Accept: application/json, text/event-stream to capture the real inputSchemas, and only then emit
+  mcp/sprinklr-tool-crosswalk.yml.'
+deployment:
+  mode: unclear
+  verified: searched
+  checked: '2026-08-12'
+  source: catalog MCP census
