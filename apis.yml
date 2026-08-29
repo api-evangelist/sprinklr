@@ -5,6 +5,17 @@ description: Sprinklr is a unified customer experience management (Unified-CXM) 
   advertising across 30+ digital channels. APIs support listening, publishing, reporting,
   user provisioning, digital asset management, and webhook integrations, all secured
   via OAuth 2.0 and accessible to enterprise license holders.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: unknown
