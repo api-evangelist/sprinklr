@@ -1,0 +1,32 @@
+# Front Door AI Index — sprinklr — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sprinklr
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sprinklr.com
+  final_host: www.sprinklr.com
+  ownership: own
+  owner: sprinklr
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 47
+  host_score: 47
+  density: 28.64
+  words: 1641
+  tiers:
+    agentic: 11
+    core: 36
+    model: 0
+  ambiguous: 7
+  top_terms:
+    AI: 36
+    agent: 4
+    agentic: 4
+    AI assistant: 3
+    AI agent: 2
+    automation: 2
+    chatbot: 2
+    intelligence: 1
