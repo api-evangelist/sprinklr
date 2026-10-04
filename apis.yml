@@ -53,7 +53,7 @@ apis:
     humanURL: https://dev.sprinklr.com/api-overview
     baseURL: https://api3.sprinklr.com
     tags:
-      - Social-Media
+      - Social Media
       - Customer Service
       - Listening
       - Publishing
@@ -68,6 +68,7 @@ apis:
       - Reporting
       - Webhooks
       - User Provisioning
+      - Social-Media
     properties:
       - type: Documentation
         url: https://dev.sprinklr.com/api-overview
