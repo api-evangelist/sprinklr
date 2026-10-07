@@ -92,6 +92,8 @@ apis:
       - FN: Sprinklr Developer Support
         url: https://dev.sprinklr.com
 common:
+  - type: Pricing
+    url: https://www.sprinklr.com/demo/
   - type: TrustCenter
     url: security/sprinklr-trust-center.yml
   - type: VulnerabilityDisclosure
