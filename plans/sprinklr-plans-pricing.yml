@@ -111,3 +111,40 @@ sources:
   - https://chatarmin.com/en/blog/sprinklr-pricing
   - https://socialbu.com/blog/sprinklr-pricing
   - https://www.sprinklr.com/pricing/
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Enterprise - Service
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise - Social
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise - Marketing
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise - Insights
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise - Advertising
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
