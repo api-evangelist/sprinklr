@@ -2,8 +2,8 @@
   "repo": "sprinklr",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/sprinklr",
-      "feed_url": "https://www.linkedin.com/company/sprinklr",
+      "source": "https://www.sprinklr.com/blog/",
+      "feed_url": "https://www.sprinklr.com/blog/",
       "title": "",
       "saved": 0,
       "method": "none"
@@ -14,9 +14,16 @@
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://www.linkedin.com/company/sprinklr",
+      "feed_url": "https://www.linkedin.com/company/sprinklr",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 14,
   "agent_pulled": "2026-06-27",
   "feed_nature": "vendor-blog",
