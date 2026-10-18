@@ -39,6 +39,16 @@ tags:
   - Customer Service
   - Marketing
   - Advertising
+  - Social Listening
+  - Publishing
+  - Reporting
+  - Unified CXM
+tags_raw:
+  - Social Media Management
+  - Customer Experience
+  - Customer Service
+  - Marketing
+  - Advertising
   - Listening
   - Publishing
   - Reporting
@@ -55,7 +65,7 @@ apis:
     tags:
       - Social Media
       - Customer Service
-      - Listening
+      - Social Listening
       - Publishing
       - Reporting
       - Webhook
