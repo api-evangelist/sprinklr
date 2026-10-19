@@ -67,3 +67,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: sprinklr-zendesk-own
+  label: Zendesk (own)
+  partner: zendesk
+  partner_name: Zendesk (own)
+  category: CRM and Marketing
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.zendesk.com/marketplace/apps/support/158377/sprinklr/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
