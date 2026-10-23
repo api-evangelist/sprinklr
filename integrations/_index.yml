@@ -150,6 +150,45 @@
     status: 'NYSE: CXM'
   status: not-a-workflow
   arazzo: null
+- slug: sprinklr-servicenow-store-partner-apps
+  label: ServiceNow Store (partner apps)
+  partner: servicenow
+  partner_name: ServiceNow Store (partner apps)
+  category: ServiceNow Store partner app / app certification
+  type: register
+  channel: standard-directory
+  evidence: https://store.servicenow.com/store/seller/359bc0f7dbcf03c00e3dfb651f9619a9
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: ServiceNow Store (store.servicenow.com/store/sitemap_xml -> /store/app/<id> server-rendered pages)
+    standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+    spec_file: null
+    role: servicenow-store-partner
+    registered_name: Sprinklr Inc.
+    register_id: 359bc0f7dbcf03c00e3dfb651f9619a9
+    matched_domain: sprinklr.com
+    matched_by: domain
+    identity_source: the listing's own seller website link (no lookup)
+    certified_products:
+    - product: ServiceNow Certified App (scoped_app / integration)
+      product_type: scoped_app / integration
+      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
+      lapsed: true
+      products_sample:
+      - Sprinklr
+      releases:
+      - Yokohama
+    products_sample:
+    - Sprinklr
+    signal_note: 'listing alone = standard-participant; certified_products = one entry per Application type the
+      seller holds a ServiceNow Certified App badge for, standard named on each; lapsed: true when none of that
+      type''s certified apps lists either of the two newest release families on the Store; app counts are context,
+      never counted'
+    detected_by: sweep-servicenow-store.py
+    detected: '2026-10-23'
+  status: not-a-workflow
+  arazzo: null
 - slug: sprinklr-microsoft-teams-own
   label: Microsoft Teams (own)
   partner: microsoft-teams
@@ -202,42 +241,42 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
-- slug: sprinklr-servicenow-store-partner-apps
-  label: ServiceNow Store (partner apps)
-  partner: servicenow
-  partner_name: ServiceNow Store (partner apps)
-  category: ServiceNow Store partner app / app certification
-  type: register
-  channel: standard-directory
-  evidence: https://store.servicenow.com/store/seller/359bc0f7dbcf03c00e3dfb651f9619a9
+- slug: sprinklr-adobe-experience-cloud-own
+  label: Adobe Experience Cloud (own)
+  partner: adobe-experience-cloud
+  partner_name: Adobe Experience Cloud (own)
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600244
   source: edge
-  relationship: standard-participant
-  contract_reference:
-    register: ServiceNow Store (store.servicenow.com/store/sitemap_xml -> /store/app/<id> server-rendered pages)
-    standard: ServiceNow Store app certification (ServiceNow Certified App badge)
-    spec_file: null
-    role: servicenow-store-partner
-    registered_name: Sprinklr Inc.
-    register_id: 359bc0f7dbcf03c00e3dfb651f9619a9
-    matched_domain: sprinklr.com
-    matched_by: domain
-    identity_source: the listing's own seller website link (no lookup)
-    certified_products:
-    - product: ServiceNow Certified App (scoped_app / integration)
-      product_type: scoped_app / integration
-      standard: ServiceNow Store app certification (ServiceNow Certified App badge)
-      lapsed: true
-      products_sample:
-      - Sprinklr
-      releases:
-      - Yokohama
-    products_sample:
-    - Sprinklr
-    signal_note: 'listing alone = standard-participant; certified_products = one entry per Application type the
-      seller holds a ServiceNow Certified App badge for, standard named on each; lapsed: true when none of that
-      type''s certified apps lists either of the two newest release families on the Store; app counts are context,
-      never counted'
-    detected_by: sweep-servicenow-store.py
-    detected: '2026-10-23'
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: sprinklr-adobe-experience-manager-own
+  label: Adobe Experience Manager (own)
+  partner: adobe-experience-manager
+  partner_name: Adobe Experience Manager (own)
+  category: Adobe Exchange Experience Cloud listing (Experience Manager)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107741
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: sprinklr-adobe-workfront-own
+  label: Adobe Workfront (own)
+  partner: workfront
+  partner_name: Adobe Workfront (own)
+  category: Adobe Exchange Experience Cloud listing (Workfront)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600238
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
